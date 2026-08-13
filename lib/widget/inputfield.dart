@@ -21,7 +21,7 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         enabled: true,
         filled: true,
-        fillColor: Colors.grey[50],
+        fillColor: Colors.grey[200],
         prefixIcon: Icon(prefixIconData, size: 18, color: Colors.grey[500]),
         suffixIcon: Icon(suffixIconData, size: 18, color: Colors.grey[500]),
         labelText: textOfField,

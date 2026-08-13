@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:footware/Authentication/loginpage.dart';
 import 'package:footware/Authentication/signup.dart';
 import 'package:footware/homepage.dart';
+import 'package:footware/widget/navigationbar.dart';
 
 void main() {
   runApp( MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => LogInPage(),
         "Signup": (context) => SignUp(),
         "homepage": (context) => HomePage(),
+        "navigationbar": (context) => KNavigationBar(),
       },
     );
   }

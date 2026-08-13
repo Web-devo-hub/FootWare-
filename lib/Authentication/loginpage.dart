@@ -6,6 +6,7 @@ import 'package:footware/widget/inputfield.dart';
 import 'package:footware/homepage.dart';
 
 import '../widget/iconbadge.dart';
+import '../widget/navigationbar.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -84,7 +85,7 @@ class _LogInPageState extends State<LogInPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => KNavigationBar()),
                   );
                 },
               ),

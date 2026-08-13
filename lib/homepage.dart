@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:footware/widget/inputfield.dart';
+import 'package:footware/widget/navigationbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +15,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 90,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         // backgroundColor: Colors.blue,
         leadingWidth: 250,
         leading: Row(
@@ -23,8 +26,8 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(left: 20),
               child: Container(
                 padding: EdgeInsets.all(10),
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
@@ -40,9 +43,18 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-                  Text(
-                    "Good Morning",
-                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                  Row(
+                    children: [
+                      Text(
+                        "Good Morning",
+                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                      ),
+                      Icon(
+                        Icons.waving_hand_rounded,
+                        color: Colors.orangeAccent,
+                        size: 13,
+                      ),
+                    ],
                   ),
                   Text(
                     "Muhammad Kaif",
@@ -58,145 +70,302 @@ class _HomePageState extends State<HomePage> {
           IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.heart)),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          children: [
-            CustomInputField(
-              textOfField: "Search",
-              obscure: false,
-              prefixIconData: Icons.search,
-              suffixIconData: Icons.tune_outlined,
-            ),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Special Offers",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "See All",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 50),
+          child: Column(
+            children: [
+              CustomInputField(
+                textOfField: "Search",
+                obscure: false,
+                prefixIconData: Icons.search,
+                suffixIconData: Icons.tune_outlined,
+              ),
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Special Offers",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                      fontSize: 18,
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.red,
-                    borderRadius: BorderRadius.circular(30),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                   ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Stack(
+                ],
+              ),
+              SizedBox(height: 10),
+
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.8),
+                      blurRadius: 40,
+                      offset: Offset(0, 55),
+                      spreadRadius: -60,
+                    ),
+                  ],
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: EdgeInsets.all(2),
+                      // height: 200,
+                      width: MediaQuery.of(context).size.width * 0.89,
+                      decoration: BoxDecoration(
+                        color: index.isEven ? Colors.red : Colors.blue,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 13),
+              SizedBox(
+                // padding: EdgeInsets.all(0),
+                height: 180,
+                width: double.infinity,
+                // color: Colors.greenAccent,
+                child: GridView.builder(
+                  itemCount: 8,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      height: 80,
+                      width: 80,
+                      // color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            width: 390,
+                            height: 55,
+                            width: 55,
+
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("shoesred.jpeg"),
-                                fit: BoxFit.fill,
+                              color: Colors.grey[350],
+                              borderRadius: BorderRadius.circular(70),
+                            ),
+                            child: Center(
+                              child: FaIcon(
+                                FontAwesomeIcons.personMilitaryPointing,
                               ),
-                              // boxShadow: [ BoxShadow(color: Colors.grey, blurRadius: 1 , spreadRadius: 10),],
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          SizedBox(height: 5),
+                          Text(
+                            "Nike",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 5),
 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Most Popular",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5),
+
+              SizedBox(
+                // color: Colors.red,
+                height: 30,
+                width: double.infinity,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                      // height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        border: BoxBorder.all(color: Colors.black, width: 1.3),
+                        // color: Colors.red,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        "adidas",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              SingleChildScrollView(
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.65,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      height: 80,
+                      width: 80,
+                      // color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
                             children: [
                               Container(
-                                margin: EdgeInsets.only(left: 25, top: 45),
-                                height: 200,
-                                width: 130,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "25%",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Today's Special!",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(height: 3),
-                                    Text(
-                                      "Get discount for every order only valid for today",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
+                                height: 180,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(30),
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/ShoeImage.jpeg"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentGeometry.topRight,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                                  width: 26,
+                                  height: 26,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Colors.black,
+                                  ),
+                                  child: Center(child: Icon(Icons.favorite_outline , color: Colors.white,size: 17,)),
+                                ),
+                              )
+
+                            ],
+                          ),
+
+                          SizedBox(height: 5),
+                          Text(
+                            "K-Swiss Vista Train..",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+
+                          Row(
+                            children: [
+                              Icon(Icons.star_half, size: 20),
+                              SizedBox(width: 5),
+
+                              Text(
+                                "4.5",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                "|",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+
+                                width: 50,
+                                height: 18,
+                                child: Text(
+                                  "8370 sold",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 8,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
+                          SizedBox(height: 4),
+
+                          Text(
+                            "\$85.00",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
                         ],
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-            ),
-            Container(
-
-              color: Colors.blue,
-
-              width: double.infinity,
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 2,
-                ),
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
