@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footware/homepage.dart';
+import 'package:footware/cart.dart';
 
 class KNavigationBar extends StatefulWidget {
    const KNavigationBar({super.key});
@@ -13,7 +14,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
 
   final List<Widget> body = [
     HomePage(),
-    Container(color: Colors.black,),
+    CartPage(),
     Container(color: Colors.orangeAccent,),
     Container(color: Colors.grey,),
     Container(color: Colors.blue,),

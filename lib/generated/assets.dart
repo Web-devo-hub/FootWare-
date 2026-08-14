@@ -13,8 +13,9 @@ class Assets {
   static const SvgGenImage icons8Facebook = SvgGenImage(
     'assets/icons8-facebook.svg',
   );
-  static const SvgGenImage icons8Nike = SvgGenImage('assets/icons8-nike.svg');
   static const AssetGenImage images = AssetGenImage('assets/images.jpeg');
+  static const AssetGenImage kaifshoes = AssetGenImage('assets/kaifshoes.jpeg');
+  static const SvgGenImage nike = SvgGenImage('assets/nike.svg');
   static const AssetGenImage shoesred = AssetGenImage('assets/shoesred.jpeg');
 }
 
