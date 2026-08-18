@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:footware/product_description.dart';
 import 'package:footware/widget/inputfield.dart';
 
 class HomePage extends StatefulWidget {
@@ -282,17 +283,24 @@ class _HomePageState extends State<HomePage> {
                               Align(
                                 alignment: AlignmentGeometry.topRight,
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                                  width: 26,
-                                  height: 26,
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal: 13,
+                                    vertical: 15,
+                                  ),
+                                  width: 30,
+                                  height: 30,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
+                                    shape: BoxShape.circle,
                                     color: Colors.black,
                                   ),
-                                  child: Center(child: Icon(Icons.favorite_outline , color: Colors.white,size: 17,)),
+                                  child: Center(
+                                    child: IconButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=> Product())); }, icon: Icon(Icons.favorite_outline , color: Colors.white,
+                                      size: 17,),
+                                      
+                                    ),
+                                  ),
                                 ),
-                              )
-
+                              ),
                             ],
                           ),
 
