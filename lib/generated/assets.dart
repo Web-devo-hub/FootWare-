@@ -8,13 +8,18 @@ class Assets {
 
   static const AssetGenImage shoeImage = AssetGenImage('assets/ShoeImage.jpeg');
   static const SvgGenImage apple = SvgGenImage('assets/apple.svg');
+  static const AssetGenImage bop = AssetGenImage('assets/bop.png');
   static const SvgGenImage facebook = SvgGenImage('assets/facebook.svg');
   static const SvgGenImage google = SvgGenImage('assets/google.svg');
   static const SvgGenImage icons8Facebook = SvgGenImage(
     'assets/icons8-facebook.svg',
   );
+  static const SvgGenImage icons8Paypal = SvgGenImage(
+    'assets/icons8-paypal.svg',
+  );
   static const AssetGenImage images = AssetGenImage('assets/images.jpeg');
   static const AssetGenImage kaifshoes = AssetGenImage('assets/kaifshoes.jpeg');
+  static const SvgGenImage mastercard = SvgGenImage('assets/mastercard.svg');
   static const SvgGenImage nike = SvgGenImage('assets/nike.svg');
   static const AssetGenImage shoesred = AssetGenImage('assets/shoesred.jpeg');
 }

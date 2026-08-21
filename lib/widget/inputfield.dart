@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class CustomInputField extends StatelessWidget {
   const CustomInputField({
     super.key,
-    required this.textOfField,
+     this.textOfField,
     this.prefixIconData,
     this.suffixIconData,
     required this.obscure,
   });
 
-  final String textOfField;
+  final String? textOfField;
   final IconData? suffixIconData;
   final IconData? prefixIconData;
   final bool obscure;
@@ -24,7 +24,7 @@ class CustomInputField extends StatelessWidget {
         fillColor: Colors.grey[200],
         prefixIcon: Icon(prefixIconData, size: 18, color: Colors.grey[500]),
         suffixIcon: Icon(suffixIconData, size: 18, color: Colors.grey[500]),
-        labelText: textOfField,
+        hintText: textOfField,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(15),

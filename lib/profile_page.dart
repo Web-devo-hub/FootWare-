@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footware/Payment/payment_methods.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -49,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             padding: EdgeInsetsGeometry.all(20),
-            height: 185,
+            height: 200,
             width: double.infinity,
             // color: Colors.red,
             child: Column(
@@ -115,8 +116,11 @@ class _ProfilePageState extends State<ProfilePage> {
             endIcon: Icons.arrow_forward_ios_rounded,
           ),
           ProfileListTile(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentMethods(isNavigatedFromProfile: true,),));
+            },
             leadingIcon: Icons.account_balance_wallet_outlined,
-            title: "Payment",
+            title: "Payment Options",
             endIcon: Icons.arrow_forward_ios_rounded,
           ),
           ProfileListTile(
@@ -134,37 +138,41 @@ class _ProfilePageState extends State<ProfilePage> {
             leadingIcon: Icons.remove_red_eye_outlined,
             title: "Dark Mode",
             trailings: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min
+              ,
               children: [
-                Switch(
-                  inactiveTrackColor: Colors.grey[100],
-                  inactiveThumbColor: Colors.white,
-                  activeTrackColor: Colors.grey,
-                  activeThumbColor: Colors.black,
-                  value: currentState,
-                  onChanged: (state) {
-                    currentState = state;
-                    setState(() {});
-                  },
+                Transform.scale(
+                  scale: 0.8,
+                  child: Switch(
+                    inactiveTrackColor: Colors.grey[100],
+                    inactiveThumbColor: Colors.white,
+                    activeTrackColor: Colors.grey,
+                    activeThumbColor: Colors.black,
+                    value: currentState,
+                    onChanged: (state) {
+                      currentState = state;
+                      setState(() {});
+                    },
+                  ),
                 ),
               ],
             ),
           ),
-          ProfileListTile(
-            leadingIcon: Icons.lock,
-            title: "Privacy",
-            endIcon: Icons.arrow_forward_ios_rounded,
-          ),
-          ProfileListTile(
-            leadingIcon: Icons.help_center_outlined,
-            title: "Help Center",
-            endIcon: Icons.arrow_forward_ios_rounded,
-          ),
-          ProfileListTile(
-            leadingIcon: Icons.people_outline,
-            title: "Invite Friends",
-            endIcon: Icons.arrow_forward_ios_rounded,
-          ),
+          // ProfileListTile(
+          //   leadingIcon: Icons.lock,
+          //   title: "Privacy",
+          //   endIcon: Icons.arrow_forward_ios_rounded,
+          // ),
+          // ProfileListTile(
+          //   leadingIcon: Icons.help_center_outlined,
+          //   title: "Help Center",
+          //   endIcon: Icons.arrow_forward_ios_rounded,
+          // ),
+          // ProfileListTile(
+          //   leadingIcon: Icons.people_outline,
+          //   title: "Invite Friends",
+          //   endIcon: Icons.arrow_forward_ios_rounded,
+          // ),
           ProfileListTile(leadingIcon: Icons.exit_to_app, title: "Logout ",textColor: Colors.red, iconColor: Colors.red,),
         ],
       ),
@@ -178,7 +186,7 @@ class ProfileListTile extends StatelessWidget {
     required this.leadingIcon,
     required this.title,
     this.endIconText,
-    this.endIcon, this.textColor, this.iconColor,
+    this.endIcon, this.textColor, this.iconColor, this.onTap,
   });
 
   final IconData leadingIcon;
@@ -187,12 +195,13 @@ class ProfileListTile extends StatelessWidget {
   final IconData? endIcon;
   final Color? textColor;
   final Color? iconColor;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-
-      minTileHeight: 35,
+      onTap:onTap,
+      minTileHeight: 40,
       leading: Icon(leadingIcon,color: iconColor??Colors.black,),
       title: Text(title, style: TextStyle(fontWeight: FontWeight.bold,color: textColor??Colors.black)),
 
@@ -208,7 +217,7 @@ class ProfileListTile extends StatelessWidget {
           ),
           Icon(
             endIcon,
-            color: Colors.black,
+            color: Colors.black54,size: 17,
           ),
         ],
       ),
@@ -232,7 +241,7 @@ class CustomProfileListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      minTileHeight: 35,
+      minTileHeight: 40,
       leading: Icon(leadingIcon),
       title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
       trailing: trailings,

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:footware/Authentication/signup.dart';
 import 'package:footware/widget/button.dart';
 import 'package:footware/widget/inputfield.dart';
-import 'package:footware/homepage.dart';
 
 import '../widget/iconbadge.dart';
 import '../widget/navigationbar.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
+
 
   @override
   State<LogInPage> createState() => _LogInPageState();
@@ -22,7 +22,7 @@ class _LogInPageState extends State<LogInPage> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -177,18 +177,3 @@ class _LogInPageState extends State<LogInPage> {
   }
 }
 
-//Container(
-//                     width: 80,
-//                     height: 60,
-//                     decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular(10),
-//                       border: Border.all(width: 0.5, color: Colors.grey),
-//                     ),
-//                     child: IconButton(
-//                       onPressed: () {},
-//                       icon: FaIcon(
-//                         FontAwesomeIcons.facebook,
-//                         color: Color(0xff1877F2),
-//                       ),
-//                     ),
-//                   ),

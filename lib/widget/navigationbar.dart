@@ -28,7 +28,9 @@ class _KNavigationBarState extends State<KNavigationBar> {
     return Scaffold(
       body: body[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+
         selectedItemColor: Colors.black,showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
         selectedFontSize: 10,
         unselectedFontSize: 10,
         unselectedLabelStyle: TextStyle(color: Colors.grey[400]),

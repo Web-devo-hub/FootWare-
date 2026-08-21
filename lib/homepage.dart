@@ -11,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int? selectedIndex;
+  bool? isSelected;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,114 +260,134 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 80,
-                      width: 80,
-                      // color: Colors.red,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 180,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(30),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/ShoeImage.jpeg"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentGeometry.topRight,
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                    horizontal: 13,
-                                    vertical: 15,
-                                  ),
-                                  width: 30,
-                                  height: 30,
+                   var isSelected = selectedIndex==index;
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Product(),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 80,
+                        width: 80,
+                        // color: Colors.red,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 180,
+                                  width: 180,
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black,
-                                  ),
-                                  child: Center(
-                                    child: IconButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=> Product())); }, icon: Icon(Icons.favorite_outline , color: Colors.white,
-                                      size: 17,),
-                                      
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(30),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/ShoeImage.jpeg"),
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                                Align(
+                                  alignment: AlignmentGeometry.topRight,
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 15,
+                                    ),
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: isSelected? Colors.red :Colors.black ,
+                                    ),
+                                    child: Center(
+                                      child: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            selectedIndex = index;
+                                          });
 
-                          SizedBox(height: 5),
-                          Text(
-                            "K-Swiss Vista Train..",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-
-                          Row(
-                            children: [
-                              Icon(Icons.star_half, size: 20),
-                              SizedBox(width: 5),
-
-                              Text(
-                                "4.5",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 13,
-                                ),
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                "|",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 13,
-                                ),
-                              ),
-                              SizedBox(width: 5),
-                              Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-
-                                width: 50,
-                                height: 18,
-                                child: Text(
-                                  "8370 sold",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
+                                        },
+                                        icon: Icon(
+                                          Icons.favorite_outline,
+                                          color: Colors.white,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 4),
-
-                          Text(
-                            "\$85.00",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              ],
                             ),
-                          ),
-                        ],
+
+                            SizedBox(height: 5),
+                            Text(
+                              "K-Swiss Vista Train..",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+
+                            Row(
+                              children: [
+                                Icon(Icons.star_half, size: 20),
+                                SizedBox(width: 5),
+
+                                Text(
+                                  "4.5",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  "|",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+
+                                  width: 50,
+                                  height: 18,
+                                  child: Text(
+                                    "8370 sold",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+
+                            Text(
+                              "\$85.00",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

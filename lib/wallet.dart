@@ -99,7 +99,7 @@ class _WalletState extends State<Wallet> {
                   return Container(
                     margin: EdgeInsets.symmetric(vertical: 2),
                     width: double.infinity,
-                    height: 80,
+                    height: 85,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footware/trackorder.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -33,7 +34,7 @@ class _OrderPageState extends State<OrderPage> {
           ),
         ],
         backgroundColor: Colors.grey[50],
-        leadingWidth: 210,
+        leadingWidth: 250,
         toolbarHeight: 90,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
@@ -87,187 +88,182 @@ class _OrderPageState extends State<OrderPage> {
                   ],
                 ),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: SizedBox(
+              ListView.builder(
+                itemCount: 5,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.only(
+                        top: 20),
                     width: double.infinity,
-                    height: 589,
-                    child: ListView.builder(
-                      itemCount: 6,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          // margin: EdgeInsets.all(10),
-                          width: double.infinity,
-                          height: 160,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          width: 110,
+                          height: 110,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage("assets/kaifshoes.jpeg"),
+                              fit: BoxFit.fill,
+                            ),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 15),
-                                width: 110,
-                                height: 110,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/kaifshoes.jpeg"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              Container(
-                                // color: Colors.red,
-                                width: 185,
-                                height: 145,
+                        ),
+                        SizedBox(
+                          // color: Colors.red,
+                          width: 200,
+                          height: 145,
 
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 15,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        "Air Jordan 3 Retro",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-
-                                      // SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.circle,
-                                            size: 20,
-                                            color: index.isEven
-                                                ? Colors.grey
-                                                : Colors.blue,
-                                          ),
-                                          SizedBox(width: 5),
-
-                                          Text(
-                                            index.isEven ? "Grey" : "Blue",
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "|",
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "Size = 42",
-                                            style: TextStyle(
-                                              color: Colors.grey[500],
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "|",
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "Qty = 2",
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 70,
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius: BorderRadius.circular(
-                                            5,
-                                          ),
-                                        ),
-                                        child: TextButton(
-                                          onPressed: () {},
-                                          child: Text(
-                                            "In Delivery",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "\$105.00",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(0),
-                                            width: 100,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: TextButton(
-                                              onPressed: () {},
-                                              child: Text(
-                                                "Track Order",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15,
+                            ),
+                            child: Column(
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  "Air Jordan 3 Retro",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                            ],
+
+                                // SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      size: 20,
+                                      color: index.isEven
+                                          ? Colors.grey
+                                          : Colors.blue,
+                                    ),
+                                    SizedBox(width: 5),
+
+                                    Text(
+                                      index.isEven ? "Grey" : "Blue",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "|",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Size = 42",
+                                      style: TextStyle(
+                                        color: Colors.grey[500],
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "|",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Qty = 2",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width: 75,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(
+                                      5,
+                                    ),
+                                  ),
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      "In Delivery",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "\$105.00",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(0),
+                                      width: 100,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(15),
+                                      ),
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> TrackOrder()));
+                                        },
+                                        child: Text(
+                                          "Track Order",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),
