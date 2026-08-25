@@ -16,6 +16,8 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.search_sharp,)),
 

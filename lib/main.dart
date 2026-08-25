@@ -3,11 +3,13 @@ import 'package:flutter/rendering.dart';
 import 'package:footware/Authentication/loginpage.dart';
 import 'package:footware/Authentication/signup.dart';
 import 'package:footware/Payment/enter_pin_page.dart';
-import 'package:footware/homepage.dart';
-import 'package:footware/product_description.dart';
+import 'package:footware/Home/favourite_items.dart';
+import 'package:footware/Home/homepage.dart';
+import 'package:footware/Home/product_description.dart';
 import 'package:footware/widget/navigationbar.dart';
 
-import 'checkout.dart';
+import 'Cart/checkout.dart';
+import 'Home/product_category.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -27,9 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (context, child) {
-        return SafeArea(
-          child: child!,
-        );
+        return SafeArea(child: child!);
       },
 
       debugShowCheckedModeBanner: false,
@@ -39,10 +39,11 @@ class MyApp extends StatelessWidget {
         "homepage": (context) => HomePage(),
         "product": (context) => Product(),
         "navigationbar": (context) => KNavigationBar(),
-        "checkout" : (context) => Checkout(),
-        "enterPin" : (context) => EnterPinPage(),
+        "checkout": (context) => Checkout(),
+        "enterPin": (context) => EnterPinPage(),
+        "category": (context) => ItemCategory(),
+        "favouriteItems": (context) => FavouriteItems(),
       },
     );
   }
 }
-

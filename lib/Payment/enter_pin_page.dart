@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Order.dart';
-import 'package:footware/trackorder.dart';
-import 'package:footware/wallet.dart';
+import 'package:footware/Order/Order.dart';
+import 'package:footware/Order/trackorder.dart';
+import 'package:footware/Wallet/wallet.dart';
 import 'package:pinput/pinput.dart';
 
 class EnterPinPage extends StatefulWidget {

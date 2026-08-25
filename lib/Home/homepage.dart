@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:footware/product_description.dart';
+import 'package:footware/Home/favourite_items.dart';
+import 'package:footware/Home/product_category.dart';
+import 'package:footware/Home/product_description.dart';
 import 'package:footware/widget/inputfield.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -80,8 +83,8 @@ class _HomePageState extends State<HomePage> {
               CustomInputField(
                 textOfField: "Search",
                 obscure: false,
-                prefixIconData: Icons.search,
-                suffixIconData: Icons.tune_outlined,
+                prefixIcon: Icon(Icons.search),
+                suffixIcon: Icon(Icons.tune_outlined),
               ),
               SizedBox(height: 12),
               Row(
@@ -131,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                     return Container(
                       margin: EdgeInsets.all(2),
                       // height: 200,
-                      width: MediaQuery.of(context).size.width * 0.89,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
                         color: index.isEven ? Colors.red : Colors.blue,
                         borderRadius: BorderRadius.circular(30),
@@ -140,10 +143,36 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              SizedBox(height: 13),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: Text(
+                  //     "See All",
+                  //     style: TextStyle(
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 15,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+              SizedBox(height: 20),
+
               SizedBox(
                 // padding: EdgeInsets.all(0),
-                height: 180,
+                height: 200,
                 width: double.infinity,
                 // color: Colors.greenAccent,
                 child: GridView.builder(
@@ -156,43 +185,48 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 80,
-                      width: 80,
-                      // color: Colors.red,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 55,
-                            width: 55,
+                    return GestureDetector(
+                      onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> ItemCategory()));
+                      },
+                      child: SizedBox(
+                        height: 80,
+                        width: 80,
+                        // color: Colors.red,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 55,
+                              width: 55,
 
-                            decoration: BoxDecoration(
-                              color: Colors.grey[350],
-                              borderRadius: BorderRadius.circular(70),
-                            ),
-                            child: Center(
-                              child: FaIcon(
-                                FontAwesomeIcons.personMilitaryPointing,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[350],
+                                borderRadius: BorderRadius.circular(70),
+                              ),
+                              child: Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.personMilitaryPointing,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            "Nike",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
+                            SizedBox(height: 5),
+                            Text(
+                              "Nike",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 20),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -218,35 +252,35 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
+              // SizedBox(height: 5),
 
-              SizedBox(
-                // color: Colors.red,
-                height: 30,
-                width: double.infinity,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-                      // height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        border: BoxBorder.all(color: Colors.black, width: 1.3),
-                        // color: Colors.red,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text(
-                        "adidas",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              // SizedBox(
+              //   // color: Colors.red,
+              //   height: 30,
+              //   width: double.infinity,
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: 20,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return Container(
+              //         margin: EdgeInsets.symmetric(horizontal: 5),
+              //         padding: EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+              //         // height: 20,
+              //         width: 60,
+              //         decoration: BoxDecoration(
+              //           border: BoxBorder.all(color: Colors.black, width: 1.3),
+              //           // color: Colors.red,
+              //           borderRadius: BorderRadius.circular(30),
+              //         ),
+              //         child: Text(
+              //           "adidas",
+              //           style: TextStyle(fontWeight: FontWeight.bold),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
               SizedBox(height: 20),
               SingleChildScrollView(
                 child: GridView.builder(
@@ -311,6 +345,7 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             selectedIndex = index;
                                           });
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>FavouriteItems()));
 
                                         },
                                         icon: Icon(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:footware/trackorder.dart';
+import 'package:footware/Order/trackorder.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -14,6 +14,8 @@ class _OrderPageState extends State<OrderPage> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
 

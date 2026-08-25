@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
-  const CustomInputField({
+  const CustomInputField(
+      {
     super.key,
      this.textOfField,
-    this.prefixIconData,
-    this.suffixIconData,
+    this.suffixIcon,
     required this.obscure,
+    this.prefixIcon, this.controller,
   });
 
   final String? textOfField;
-  final IconData? suffixIconData;
-  final IconData? prefixIconData;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final bool obscure;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
         enabled: true,
         filled: true,
         fillColor: Colors.grey[200],
-        prefixIcon: Icon(prefixIconData, size: 18, color: Colors.grey[500]),
-        suffixIcon: Icon(suffixIconData, size: 18, color: Colors.grey[500]),
+        prefixIcon: prefixIcon,
+        // suffixIcon: IconButton(onPressed: (){}, icon: Icon(suffixIconData)),
+        suffixIcon: suffixIcon,
         hintText: textOfField,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,

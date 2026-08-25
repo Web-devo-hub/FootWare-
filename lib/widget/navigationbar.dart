@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Order.dart';
-import 'package:footware/homepage.dart';
-import 'package:footware/cart.dart';
-import 'package:footware/profile_page.dart';
-import 'package:footware/wallet.dart';
+import 'package:footware/Order/Order.dart';
+import 'package:footware/Home/homepage.dart';
+import 'package:footware/Cart/cart.dart';
+import 'package:footware/Profile_Page/profile_page.dart';
+import 'package:footware/Wallet/wallet.dart';
 
 class KNavigationBar extends StatefulWidget {
    const KNavigationBar({super.key});

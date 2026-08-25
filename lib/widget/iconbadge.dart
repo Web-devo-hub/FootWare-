@@ -11,7 +11,7 @@ final String svgLocation;
     return GestureDetector(
       onTap: (){},
       child: Container(
-        width: 80,
+        width: 60,
         padding: EdgeInsets.all(15),
         height: 60,
         decoration: BoxDecoration(

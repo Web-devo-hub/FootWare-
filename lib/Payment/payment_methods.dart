@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:footware/Payment/addcard.dart';
 import 'package:footware/Payment/enter_pin_page.dart';
-import 'package:footware/wallet.dart';
+import 'package:footware/Wallet/wallet.dart';
 
 class PaymentMethods extends StatefulWidget {
   PaymentMethods({super.key, required this.isNavigatedFromProfile});
@@ -36,6 +36,8 @@ class _PaymentMethodsState extends State<PaymentMethods> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         centerTitle: false,
+        scrolledUnderElevation: 0,
+
         actions: [
           // IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
           Container(

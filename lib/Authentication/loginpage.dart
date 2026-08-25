@@ -49,13 +49,13 @@ class _LogInPageState extends State<LogInPage> {
               SizedBox(height: 50),
               CustomInputField(textOfField: "Email",
                 obscure: false,
-                prefixIconData: Icons.mail,),
+                prefixIcon: Icon(Icons.mail,),),
               SizedBox(height: 20),
         
               CustomInputField(textOfField: "Password",
                 obscure: true,
-                prefixIconData: Icons.lock,
-                suffixIconData: Icons.remove_red_eye_sharp,),
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: Icon(Icons.remove_red_eye_sharp,)),
               SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 3),

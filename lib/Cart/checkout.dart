@@ -16,6 +16,7 @@ class _CheckoutState extends State<Checkout> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         centerTitle: false,
+        scrolledUnderElevation: 0,
 
         actions: [
           // IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
