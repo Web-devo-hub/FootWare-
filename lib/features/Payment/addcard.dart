@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:footware/Payment/payment_methods.dart';
+import 'package:footware/features/Payment/payment_methods.dart';
 import 'package:footware/widget/inputfield.dart';
 
 class AddCard extends StatefulWidget {
@@ -11,7 +11,18 @@ class AddCard extends StatefulWidget {
 }
 
 class _AddCardState extends State<AddCard> {
-  final TextEditingController dateController = TextEditingController();
+  final TextEditingController expiryDateController = TextEditingController();
+  final TextEditingController cardNameController = TextEditingController();
+  final TextEditingController cardNumberController = TextEditingController();
+  final TextEditingController cardCvvController = TextEditingController();
+
+  final cardNameFocus = FocusNode();
+  final cardNumberFocus = FocusNode();
+  final expiryFocus = FocusNode();
+  final cvvFocus = FocusNode();
+
+  // final FocusNode focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,14 +67,15 @@ class _AddCardState extends State<AddCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CreditCardWidget(
-                cardNumber: "6110187800144321",
-                expiryDate: "01/28",
-                cardHolderName: "Muhammad Kaif",
-                cvvCode: "123",
+                cardNumber: cardNumberController.text,
+                expiryDate: expiryDateController.text,
+                cardHolderName: cardNameController.text,
+                cvvCode: cardCvvController.text,
                 showBackView: false,
                 onCreditCardWidgetChange: (CreditCardBrand brand) {},
                 obscureCardNumber: true,
                 cardBgColor: Colors.black12,
+                obscureCardCvv: false,
                 // animationDuration:  Duration(milliseconds: 12),
                 isHolderNameVisible: true,
                 bankName: "Habib Metro",
@@ -79,10 +91,23 @@ class _AddCardState extends State<AddCard> {
               ),
               SizedBox(height: 10),
 
-              CustomInputField(obscure: false),
+              CustomInputField(
+                focusNode: cardNameFocus,
+                obscure: false,
+                controller: cardNameController,
+                onTapOutside: (event) {
+                  setState(() {});
+                  cardNameFocus.unfocus();
+
+                },
+                onEditingComplete: () {
+                  setState(() {});
+                  cardNameFocus.nextFocus();
+                },
+              ),
               SizedBox(height: 20),
               Text(
-                "Card Number",
+                "Card No",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -91,12 +116,24 @@ class _AddCardState extends State<AddCard> {
               ),
               SizedBox(height: 10),
               CustomInputField(
+                focusNode: cardNumberFocus,
+                onTapOutside: (event) {
+                  setState(() {});
+                  cardNumberFocus.unfocus();
+
+                },
+                onEditingComplete: () {
+                  setState(() {});
+
+                  cardNumberFocus.nextFocus();
+                },
+                controller: cardNumberController,
                 textOfField: "2342 4655 9384 3487",
                 obscure: false,
               ),
               SizedBox(height: 20),
               Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,10 +150,19 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       SizedBox(
                         width: 160,
                         child: CustomInputField(
-                          controller:dateController,
+                          focusNode: expiryFocus,
+                          onTapOutside: (event) {
+                            setState(() {});
+                            expiryFocus.unfocus();
+                          },
+                          onEditingComplete: () {
+                            setState(() {});
+                            expiryFocus.nextFocus();
+                          },
+                          controller: expiryDateController,
                           obscure: false,
                           suffixIcon: IconButton(
-                            onPressed: () async{
+                            onPressed: () async {
                               DateTime? selectedDate = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
@@ -125,8 +171,8 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               );
                               if (selectedDate != null) {
                                 setState(() {
-                                  dateController.text =
-                                  "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+                                  expiryDateController.text =
+                                      "${selectedDate.month}/${selectedDate.year}";
                                 });
                               }
                             },
@@ -151,16 +197,27 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       SizedBox(
                         width: 160,
                         child: CustomInputField(
+                          focusNode:  cvvFocus,
+                          onTapOutside: (event) {
+                            setState(() {});
+                            cvvFocus.unfocus();
+
+                          },
+                          onEditingComplete: () {
+                            setState(() {});
+                            cvvFocus.nextFocus();
+                          },
+                          controller: cardCvvController,
                           obscure: false,
-                            textOfField: "666",
-                          ),
+                          textOfField: "666",
                         ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
 
-              SizedBox(height: 210),
+              SizedBox(height: 115),
               Container(
                 width: double.infinity,
                 height: 50,
@@ -170,7 +227,13 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
                 child: TextButton.icon(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PaymentMethods(isNavigatedFromProfile: true)));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PaymentMethods(isNavigatedFromProfile: true),
+                      ),
+                    );
                   },
                   label: Text(
                     "Checkout",

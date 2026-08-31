@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Home/product_description.dart';
+import 'package:footware/constants/dome_constant_data.dart';
+import 'package:footware/features/Product/product_description.dart';
 
 class FavouriteItems extends StatefulWidget {
   const FavouriteItems({super.key});
@@ -48,6 +49,7 @@ class _FavouriteItemsState extends State<FavouriteItems> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
+
                   bool isSelected = selectedIndex == index;
                   return GestureDetector(
                     onTap: () {

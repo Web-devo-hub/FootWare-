@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
-  const CustomInputField(
-      {
+  const CustomInputField({
     super.key,
-     this.textOfField,
+    this.textOfField,
     this.suffixIcon,
     required this.obscure,
-    this.prefixIcon, this.controller,
+    this.prefixIcon,
+    this.controller,
+    this.onEditingComplete,
+    this.onTapOutside,
+    this.focusNode,
+    // this.textInputAction,
   });
 
   final String? textOfField;
@@ -15,11 +19,19 @@ class CustomInputField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscure;
   final TextEditingController? controller;
+  final VoidCallback? onEditingComplete;
+  final TapRegionCallback? onTapOutside;
+  final FocusNode? focusNode;
+  // final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next,
+      onEditingComplete: onEditingComplete,
+      onTapOutside: onTapOutside,
       controller: controller,
+      focusNode: focusNode,
       obscureText: obscure,
       decoration: InputDecoration(
         enabled: true,

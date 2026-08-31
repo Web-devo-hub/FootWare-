@@ -1,9 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:footware/Authentication/loginpage.dart';
 import 'package:footware/widget/button.dart';
 import 'package:footware/widget/inputfield.dart';
+
+import 'loginpage.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,6 +14,20 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final TextEditingController nameController = TextEditingController(text: "");
+  final TextEditingController phoneNoController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneNoController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,31 +58,52 @@ class _SignUpState extends State<SignUp> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
-              CustomInputField(textOfField: "Name",
+              CustomInputField(
+                controller: nameController,
+                textOfField: "Name",
                 obscure: false,
-                prefixIcon: Icon(Icons.person),),
+                prefixIcon: Icon(Icons.person),
+              ),
               SizedBox(height: 20),
-        
-              CustomInputField(textOfField: "Phone No",
+
+              CustomInputField(
+                controller: phoneNoController,
+                textOfField: "Phone No",
                 obscure: false,
-                prefixIcon: Icon(Icons.phone),),
+                prefixIcon: Icon(Icons.phone),
+              ),
               SizedBox(height: 20),
-              CustomInputField(textOfField: "Email",
+              CustomInputField(
+                controller: emailController,
+                textOfField: "Email",
                 obscure: false,
-                prefixIcon: Icon(Icons.email,)),
+                prefixIcon: Icon(Icons.email),
+              ),
               SizedBox(height: 20),
-        
-              CustomInputField(textOfField: "Password",
+
+              CustomInputField(
+                controller: passwordController,
+                textOfField: "Password",
                 obscure: true,
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: Icon(Icons.remove_red_eye_sharp),
               ),
               SizedBox(height: 15),
-        
+
               SizedBox(height: 20),
               CustomButton(
                 title: "Sign up",
                 onTap: () {
+                  if (nameController.text.trim().isEmpty ||
+                      phoneNoController.text.trim().isEmpty ||
+                      emailController.text.trim().isEmpty ||
+                      passwordController.text.trim().isEmpty) {
+                    print("block 1");
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please enter all fields")),
+                    );
+                    return;
+                  }
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LogInPage()),
@@ -86,7 +122,9 @@ class _SignUpState extends State<SignUp> {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LogInPage()),
+                            MaterialPageRoute(
+                              builder: (context) => LogInPage(),
+                            ),
                           ); //add signup route here
                         },
                       style: TextStyle(

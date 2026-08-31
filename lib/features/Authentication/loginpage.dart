@@ -1,21 +1,39 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:footware/Authentication/signup.dart';
+import 'package:footware/features/Authentication/signup.dart';
 import 'package:footware/widget/button.dart';
 import 'package:footware/widget/inputfield.dart';
 
-import '../widget/iconbadge.dart';
-import '../widget/navigationbar.dart';
+import '../../widget/iconbadge.dart';
+import '../../widget/navigationbar.dart';
+
+
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
-
 
   @override
   State<LogInPage> createState() => _LogInPageState();
 }
 
 class _LogInPageState extends State<LogInPage> {
+  bool isClicked = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   emailController.text = "test@gmail.com";
+  //   passwordController.text = "123456";
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,34 +65,42 @@ class _LogInPageState extends State<LogInPage> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 50),
-              CustomInputField(textOfField: "Email",
+              CustomInputField(
+                controller: emailController,
+                textOfField: "Email",
                 obscure: false,
-                prefixIcon: Icon(Icons.mail,),),
+                prefixIcon: Icon(Icons.mail),
+              ),
               SizedBox(height: 20),
-        
-              CustomInputField(textOfField: "Password",
+
+              CustomInputField(
+                controller: passwordController,
+                textOfField: "Password",
                 obscure: true,
                 prefixIcon: Icon(Icons.lock),
-                suffixIcon: Icon(Icons.remove_red_eye_sharp,)),
+                suffixIcon: Icon(Icons.remove_red_eye_sharp),
+              ),
               SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 3),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3),
-                        shape: BoxShape.rectangle,
-                      ),
+                    Checkbox(
+                      value: isClicked,
+                      onChanged: (value) {
+                        setState(() {
+                          isClicked = value ?? false;
+                        });
+                      },
                     ),
-                    SizedBox(width: 13),
+                    SizedBox(width: 2),
                     Text(
                       "Remember me",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
                   ],
                 ),
@@ -83,6 +109,13 @@ class _LogInPageState extends State<LogInPage> {
               CustomButton(
                 title: "Sign in",
                 onTap: () {
+                  if (emailController.text.trim().isEmpty ||
+                      passwordController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Enter Email & Password")),
+                    );
+                    return;
+                  }
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => KNavigationBar()),
@@ -123,7 +156,7 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                   SizedBox(width: 7),
-        
+
                   SizedBox(
                     width: 70,
                     child: Divider(
@@ -139,14 +172,14 @@ class _LogInPageState extends State<LogInPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CustomSvgButton(svgLocation: "assets/facebook.svg",),
-                    CustomSvgButton(svgLocation: "assets/google.svg",),
-                    CustomSvgButton(svgLocation: "assets/apple.svg",),
+                    CustomSvgButton(svgLocation: "assets/facebook.svg"),
+                    CustomSvgButton(svgLocation: "assets/google.svg"),
+                    CustomSvgButton(svgLocation: "assets/apple.svg"),
                   ],
                 ),
               ),
               SizedBox(height: 30),
-        
+
               RichText(
                 text: TextSpan(
                   style: TextStyle(color: Colors.grey),
@@ -176,4 +209,3 @@ class _LogInPageState extends State<LogInPage> {
     );
   }
 }
-

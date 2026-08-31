@@ -15,7 +15,7 @@ class _WalletState extends State<Wallet> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
+          // IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
           // IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
           Container(
             margin: EdgeInsets.only(right: 13),

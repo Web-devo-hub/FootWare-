@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Order/trackorder.dart';
+import 'package:footware/features/Order/trackorder.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -9,6 +9,7 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+  bool isActive = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,7 @@ class _OrderPageState extends State<OrderPage> {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[50],
-                  border: BoxBorder.fromLTRB(bottom: BorderSide(width: 2)),
+                  // border: BoxBorder.fromLTRB(bottom: BorderSide(width: 2)),
                 ),
                 height: 50,
                 width: double.infinity,
@@ -66,29 +67,59 @@ class _OrderPageState extends State<OrderPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          isActive = true;
+                        });
+                      },
                       child: Text(
                         "Active",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.black,
+                          color: isActive? Colors.black:Colors.grey,
                         ),
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          isActive = false;
+                        });
+
+                      },
                       child: Text(
                         "Completed",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.grey,
+                          color: isActive ? Colors.grey: Colors.black,
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+
+                      thickness: isActive?  2 : 0.5,
+                      color: Colors.black,
+
+                    ),
+                  ),
+
+
+                  Expanded(
+                    child: Divider(
+                      thickness: isActive? .5:2,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
               ListView.builder(
                 itemCount: 5,
@@ -121,7 +152,7 @@ class _OrderPageState extends State<OrderPage> {
                         ),
                         SizedBox(
                           // color: Colors.red,
-                          width: 200,
+                          width: 220,
                           height: 145,
 
                           child: Padding(
@@ -202,8 +233,8 @@ class _OrderPageState extends State<OrderPage> {
                                   ],
                                 ),
                                 Container(
-                                  width: 75,
-                                  height: 30,
+                                  width: 90,
+                                  height: 29,
                                   decoration: BoxDecoration(
                                     color: Colors.grey[200],
                                     borderRadius: BorderRadius.circular(
@@ -237,8 +268,8 @@ class _OrderPageState extends State<OrderPage> {
                                     Container(
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.all(0),
-                                      width: 100,
-                                      height: 30,
+                                      width: 110,
+                                      height: 35,
                                       decoration: BoxDecoration(
                                         color: Colors.black,
                                         borderRadius:

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Order/Order.dart';
-import 'package:footware/Order/trackorder.dart';
-import 'package:footware/Wallet/wallet.dart';
+
 import 'package:pinput/pinput.dart';
+
+import '../Order/Order.dart';
+import '../Order/trackorder.dart';
 
 class EnterPinPage extends StatefulWidget {
   const EnterPinPage({super.key});
@@ -52,7 +53,7 @@ class _EnterPinPageState extends State<EnterPinPage> {
                   showDialog(
 
                     context: context,
-                    barrierDismissible: false,
+                    barrierDismissible: true,
                     builder: (context) {
                       return Center(
                         child: Container(

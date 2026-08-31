@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:footware/Home/favourite_items.dart';
-import 'package:footware/Home/product_category.dart';
-import 'package:footware/Home/product_description.dart';
+import 'package:footware/constants/dome_constant_data.dart';
+
 import 'package:footware/widget/inputfield.dart';
 
+import '../Product/favourite_items.dart';
+import '../Product/product_category.dart';
+import '../Product/product_description.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int? selectedIndex;
   bool? isSelected;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +76,15 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.bell)),
-          IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.heart)),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavouriteItems()),
+              );
+            },
+            icon: FaIcon(FontAwesomeIcons.heart),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -136,7 +148,11 @@ class _HomePageState extends State<HomePage> {
                       // height: 200,
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
-                        color: index.isEven ? Colors.red : Colors.blue,
+                        image: DecorationImage(
+                          image: AssetImage("assets/shoesred.jpeg"),
+                          fit: BoxFit.fill,
+                        ),
+                        // color: index.isEven ? Colors.red : Colors.blue,
                         borderRadius: BorderRadius.circular(30),
                       ),
                     );
@@ -155,17 +171,6 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 18,
                     ),
                   ),
-                  // TextButton(
-                  //   onPressed: () {},
-                  //   child: Text(
-                  //     "See All",
-                  //     style: TextStyle(
-                  //       color: Colors.black,
-                  //       fontWeight: FontWeight.bold,
-                  //       fontSize: 15,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
               SizedBox(height: 20),
@@ -185,9 +190,16 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
+                    final category = jsonData["categories"][index];
                     return GestureDetector(
-                      onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> ItemCategory()));
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ItemCategory(category: category),
+                          ),
+                        );
                       },
                       child: SizedBox(
                         height: 80,
@@ -199,20 +211,19 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               height: 55,
                               width: 55,
-
                               decoration: BoxDecoration(
-                                color: Colors.grey[350],
-                                borderRadius: BorderRadius.circular(70),
-                              ),
-                              child: Center(
-                                child: FaIcon(
-                                  FontAwesomeIcons.personMilitaryPointing,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    "${category["categoryImage"]}",
+                                  ),
+                                  fit: BoxFit.fill
                                 ),
                               ),
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "Nike",
+                              "${category["categoryName"]}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -252,40 +263,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              // SizedBox(height: 5),
-
-              // SizedBox(
-              //   // color: Colors.red,
-              //   height: 30,
-              //   width: double.infinity,
-              //   child: ListView.builder(
-              //     shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     itemCount: 20,
-              //     itemBuilder: (BuildContext context, int index) {
-              //       return Container(
-              //         margin: EdgeInsets.symmetric(horizontal: 5),
-              //         padding: EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-              //         // height: 20,
-              //         width: 60,
-              //         decoration: BoxDecoration(
-              //           border: BoxBorder.all(color: Colors.black, width: 1.3),
-              //           // color: Colors.red,
-              //           borderRadius: BorderRadius.circular(30),
-              //         ),
-              //         child: Text(
-              //           "adidas",
-              //           style: TextStyle(fontWeight: FontWeight.bold),
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
               SizedBox(height: 20),
               SingleChildScrollView(
                 child: GridView.builder(
                   shrinkWrap: true,
-                  itemCount: 10,
+                  // itemCount: jsonData["mostPopular"],
+                  itemCount: jsonData["mostPopular"].length,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -294,13 +277,15 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
-                   var isSelected = selectedIndex==index;
+                    final mostPopular = jsonData["mostPopular"][index];
+                    var isSelected = selectedIndex == index;
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Product(),
+                            builder: (context) =>
+                                Product(productDetail: mostPopular),
                           ),
                         );
                       },
@@ -321,7 +306,9 @@ class _HomePageState extends State<HomePage> {
                                     color: Colors.grey,
                                     borderRadius: BorderRadius.circular(30),
                                     image: DecorationImage(
-                                      image: AssetImage("assets/ShoeImage.jpeg"),
+                                      image: NetworkImage(
+                                        ("${mostPopular["image"]}"),
+                                      ),
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -337,7 +324,9 @@ class _HomePageState extends State<HomePage> {
                                     height: 30,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: isSelected? Colors.red :Colors.black ,
+                                      color: isSelected
+                                          ? Colors.red
+                                          : Colors.black,
                                     ),
                                     child: Center(
                                       child: IconButton(
@@ -345,8 +334,7 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             selectedIndex = index;
                                           });
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>FavouriteItems()));
-
+                                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>FavouriteItems()));
                                         },
                                         icon: Icon(
                                           Icons.favorite_outline,
@@ -362,7 +350,7 @@ class _HomePageState extends State<HomePage> {
 
                             SizedBox(height: 5),
                             Text(
-                              "K-Swiss Vista Train..",
+                              mostPopular["name"],
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -377,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(width: 5),
 
                                 Text(
-                                  "4.5",
+                                  "${mostPopular["rating"]}",
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 13,
@@ -402,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                                   width: 50,
                                   height: 18,
                                   child: Text(
-                                    "8370 sold",
+                                    "${mostPopular["itemsSold"]} sold",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 8,
@@ -414,7 +402,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(height: 4),
 
                             Text(
-                              "\$85.00",
+                              "Rs.${mostPopular["price"]}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,

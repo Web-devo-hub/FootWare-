@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:footware/Authentication/loginpage.dart';
-import 'package:footware/Authentication/signup.dart';
-import 'package:footware/Payment/enter_pin_page.dart';
-import 'package:footware/Home/favourite_items.dart';
-import 'package:footware/Home/homepage.dart';
-import 'package:footware/Home/product_description.dart';
 import 'package:footware/widget/navigationbar.dart';
 
-import 'Cart/checkout.dart';
-import 'Home/product_category.dart';
+import 'features/Authentication/loginpage.dart';
+import 'features/Authentication/signup.dart';
+import 'features/Cart/checkout.dart';
+import 'features/Home/homepage.dart';
+import 'features/Payment/enter_pin_page.dart';
+import 'features/Product/favourite_items.dart';
+import 'features/Product/product_category.dart';
+import 'features/Product/product_description.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -28,16 +28,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: (context, child) {
-        return SafeArea(child: child!);
-      },
+      // builder: (context, child) {
+      //   return SafeArea(child: child!);
+      // },
 
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => LogInPage(),
         "Signup": (context) => SignUp(),
         "homepage": (context) => HomePage(),
-        "product": (context) => Product(),
+        // "product": (context) => Product(),
         "navigationbar": (context) => KNavigationBar(),
         "checkout": (context) => Checkout(),
         "enterPin": (context) => EnterPinPage(),

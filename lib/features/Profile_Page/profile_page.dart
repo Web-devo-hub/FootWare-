@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Payment/payment_methods.dart';
+
+import '../Authentication/loginpage.dart';
+import '../Payment/payment_methods.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -30,14 +33,15 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Icon(Icons.more_horiz, size: 15)],
             ),
-          ),],
+          ),
+        ],
         backgroundColor: Colors.grey.shade50,
-        leadingWidth: 200,
+        leadingWidth: 270,
         toolbarHeight: 90,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
           child: Text(
-            "My Cart",
+            "My Profile",
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -116,8 +120,14 @@ class _ProfilePageState extends State<ProfilePage> {
             endIcon: Icons.arrow_forward_ios_rounded,
           ),
           ProfileListTile(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentMethods(isNavigatedFromProfile: true,),));
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PaymentMethods(isNavigatedFromProfile: true),
+                ),
+              );
             },
             leadingIcon: Icons.account_balance_wallet_outlined,
             title: "Payment Options",
@@ -138,8 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
             leadingIcon: Icons.remove_red_eye_outlined,
             title: "Dark Mode",
             trailings: Row(
-              mainAxisSize: MainAxisSize.min
-              ,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Transform.scale(
                   scale: 0.8,
@@ -158,22 +167,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          // ProfileListTile(
-          //   leadingIcon: Icons.lock,
-          //   title: "Privacy",
-          //   endIcon: Icons.arrow_forward_ios_rounded,
-          // ),
-          // ProfileListTile(
-          //   leadingIcon: Icons.help_center_outlined,
-          //   title: "Help Center",
-          //   endIcon: Icons.arrow_forward_ios_rounded,
-          // ),
-          // ProfileListTile(
-          //   leadingIcon: Icons.people_outline,
-          //   title: "Invite Friends",
-          //   endIcon: Icons.arrow_forward_ios_rounded,
-          // ),
-          ProfileListTile(leadingIcon: Icons.exit_to_app, title: "Logout ",textColor: Colors.red, iconColor: Colors.red,),
+          ProfileListTile(
+            leadingIcon: Icons.exit_to_app,
+            title: "Logout ",
+            textColor: Colors.red,
+            iconColor: Colors.red,
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> LogInPage()));
+            },
+          ),
         ],
       ),
     );
@@ -186,7 +188,10 @@ class ProfileListTile extends StatelessWidget {
     required this.leadingIcon,
     required this.title,
     this.endIconText,
-    this.endIcon, this.textColor, this.iconColor, this.onTap,
+    this.endIcon,
+    this.textColor,
+    this.iconColor,
+    this.onTap,
   });
 
   final IconData leadingIcon;
@@ -200,10 +205,16 @@ class ProfileListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap:onTap,
+      onTap: onTap,
       minTileHeight: 40,
-      leading: Icon(leadingIcon,color: iconColor??Colors.black,),
-      title: Text(title, style: TextStyle(fontWeight: FontWeight.bold,color: textColor??Colors.black)),
+      leading: Icon(leadingIcon, color: iconColor ?? Colors.black),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: textColor ?? Colors.black,
+        ),
+      ),
 
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -215,13 +226,9 @@ class ProfileListTile extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Icon(
-            endIcon,
-            color: Colors.black54,size: 17,
-          ),
+          Icon(endIcon, color: Colors.black54, size: 17),
         ],
       ),
-
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:footware/Payment/addcard.dart';
-import 'package:footware/Payment/enter_pin_page.dart';
-import 'package:footware/Wallet/wallet.dart';
+
+import 'addcard.dart';
+import 'enter_pin_page.dart';
+
 
 class PaymentMethods extends StatefulWidget {
   PaymentMethods({super.key, required this.isNavigatedFromProfile});
@@ -17,18 +18,9 @@ class _PaymentMethodsState extends State<PaymentMethods> {
   int index = 0;
   int selectedIndex = 0;
 
-  final List<String> names = [
-    "GooglePay",
-    "**** **** **** 4679",
-  ];
+  final List<String> names = ["GooglePay", "**** **** **** 4679"];
 
-  final List<String> svg = [
-    "assets/google.svg",
-    "assets/mastercard.svg",
-  ];
-
-
-
+  final List<String> svg = ["assets/google.svg", "assets/mastercard.svg"];
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +32,14 @@ class _PaymentMethodsState extends State<PaymentMethods> {
 
         actions: [
           // IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
-          Container(
-            margin: EdgeInsets.only(right: 13),
-            width: 23,
-            height: 23,
-            // color: Colors.red,
-            decoration: BoxDecoration(
-              // color: Colors.red,
-              shape: BoxShape.circle,
-              border: BoxBorder.all(width: 1),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(Icons.add, size: 15)],
-            ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddCard()),
+              );
+            },
+            icon: Icon(Icons.add, size: 30),
           ),
         ],
         backgroundColor: Colors.grey[50],
@@ -82,25 +68,26 @@ class _PaymentMethodsState extends State<PaymentMethods> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
-                bool isSelected = selectedIndex== index;
+                bool isSelected = selectedIndex == index;
                 return PaymentOptions(
                   svgAssetName: svg[index],
                   nameofOption: names[index],
                   endIcon: widget.isNavigatedFromProfile
-                      ? IconButton(onPressed: (){}, icon: Icon(Icons.delete_outline_rounded))
+                      ? IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.delete_outline_rounded),
+                        )
                       : IconButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                    },
-                    icon: Icon(
-                      isSelected
-                          ? Icons.circle
-                          : Icons.circle_outlined,
-                      color: isSelected ? Colors.black : Colors.grey,
-                    ),
-                  ),
+                          onPressed: () {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
+                          icon: Icon(
+                            isSelected ? Icons.circle : Icons.circle_outlined,
+                            color: isSelected ? Colors.black : Colors.grey,
+                          ),
+                        ),
                 );
               },
             ),

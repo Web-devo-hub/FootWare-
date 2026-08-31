@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:footware/Payment/payment_methods.dart';
+import 'package:footware/constants/constants.dart';
+
+import '../Payment/payment_methods.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({super.key});
@@ -10,6 +12,26 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
+  @override
+  void initState() {
+    super.initState();
+    quantities = List.filled(cartItems?.length ?? 0, 1);
+  }
+
+  double getTotalPrice() {
+    double total = 0;
+
+    for (int i = 0; i < (cartItems?.length ?? 0); i++) {
+      final item = cartItems![i];
+
+      double price = (item["price"] ?? 0).toDouble();
+
+      total += price * quantities[i];
+    }
+
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,10 +144,12 @@ class _CheckoutState extends State<Checkout> {
               SizedBox(height: 25),
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
+                itemCount: cartItems?.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) {
+                  final cartProduct = cartItems![index];
+
                   return Container(
                     margin: EdgeInsets.only(bottom: 10),
                     width: double.infinity,
@@ -142,18 +166,18 @@ class _CheckoutState extends State<Checkout> {
                           height: 110,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/kaifshoes.jpeg"),
+                              image: NetworkImage("${cartProduct["image"]}"),
                               fit: BoxFit.fill,
                             ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        SizedBox(
+                        Container(
                           // color: Colors.red,
-                          width: 185,
+                          width: 230,
                           height: 145,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -163,17 +187,25 @@ class _CheckoutState extends State<Checkout> {
 
                                   children: [
                                     Text(
-                                      "Air Jordan 3 Retro",
+                                      "${cartProduct["name"]}",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.delete_outline_rounded,
-                                      size: 26,
-                                      color: Colors.grey[600],
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          cartItems?.removeAt(index);
+
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_outline_rounded,
+                                        size: 26,
+                                        color: Colors.grey[600],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -191,7 +223,7 @@ class _CheckoutState extends State<Checkout> {
                                     SizedBox(width: 5),
 
                                     Text(
-                                      "Black",
+                                      "color",
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 13,
@@ -209,7 +241,7 @@ class _CheckoutState extends State<Checkout> {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      "Size = 42",
+                                      "Size = ${cartProduct["sizes"]}",
                                       style: TextStyle(
                                         color: Colors.grey[500],
                                         fontSize: 13,
@@ -224,7 +256,7 @@ class _CheckoutState extends State<Checkout> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "\$105.00",
+                                      "Rs. ${getTotalPrice().toStringAsFixed(0)}",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 17,
@@ -241,7 +273,7 @@ class _CheckoutState extends State<Checkout> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          "1",
+                                          quantities[index].toString(),
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -384,24 +416,36 @@ class _CheckoutState extends State<Checkout> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Amount" ,style: TextStyle(color: Colors.grey),), Text("\$585.00")],
+                      children: [
+                        Text("Amount", style: TextStyle(color: Colors.grey)),
+                        Text(getTotalPrice().toStringAsFixed(0)),
+                      ],
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Shipping" ,style: TextStyle(color: Colors.grey),), Text("\$15.00")],
+                      children: [
+                        Text("Shipping", style: TextStyle(color: Colors.grey)),
+                        Text("\$15.00"),
+                      ],
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Promo" ,style: TextStyle(color: Colors.grey),), Text("\$-175.00")],
+                      children: [
+                        Text("Promo", style: TextStyle(color: Colors.grey)),
+                        Text("\$-175.00"),
+                      ],
                     ),
-                    SizedBox(height: 10,),
-                    Divider(thickness: 0.2,),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10),
+                    Divider(thickness: 0.2),
+                    SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Total" ,style: TextStyle(color: Colors.grey),), Text("\$424.00")],
+                      children: [
+                        Text("Total", style: TextStyle(color: Colors.grey)),
+                        Text("${[]}"),
+                      ],
                     ),
                   ],
                 ),
@@ -420,7 +464,10 @@ class _CheckoutState extends State<Checkout> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PaymentMethods(isNavigatedFromProfile: false)),
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PaymentMethods(isNavigatedFromProfile: false),
+                      ),
                     );
                   },
                   label: Text(
