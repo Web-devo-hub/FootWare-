@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../features/Cart/cart.dart';
-import '../features/Home/homepage.dart';
-import '../features/Order/Order.dart';
-import '../features/Profile_Page/profile_page.dart';
-import '../features/Wallet/wallet.dart';
+import '../Features/Cart/cart.dart';
+import '../Features/Home/homepage.dart';
+import '../Features/Order/Order.dart';
+import '../Features/Profile_Page/profile_page.dart';
+import '../Features/Wallet/wallet.dart';
+// dartimport '../features/Cart/cart.dart';
+// import '../features/Home/homepage.dart';
+// import '../features/Order/Order.dart';
+// import '../features/Profile_Page/profile_page.dart';
+// import '../features/Wallet/wallet.dart';
 
 
 class KNavigationBar extends StatefulWidget {
