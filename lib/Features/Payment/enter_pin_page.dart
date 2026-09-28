@@ -53,7 +53,6 @@ class _EnterPinPageState extends State<EnterPinPage> {
               child: TextButton.icon(
                 onPressed: () {
                   showDialog(
-
                     context: context,
                     barrierDismissible: false,
                     builder: (context) {

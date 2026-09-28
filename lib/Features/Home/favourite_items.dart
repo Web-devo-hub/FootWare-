@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footware/Features/Home/product_description.dart';
+import 'package:footware/constants/constants.dart';
 // import 'package:footware/Home/product_description.dart';
 
 class FavouriteItems extends StatefulWidget {
@@ -42,49 +43,12 @@ class _FavouriteItemsState extends State<FavouriteItems> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            SizedBox(
-              height: 35,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  bool isSelected = selectedIndex == index;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-                      height: 20,
-                      // width: 80,
-                      decoration: BoxDecoration(
-                        border: BoxBorder.all(color: Colors.black, width: 1.3),
-                        color: isSelected ? Colors.black : Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "adidas",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: isSelected? Colors.white:Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+
             SizedBox(height: 20,),
             Expanded(
               child: GridView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: SingletonList.favourites?.length,
                 // physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -99,7 +63,7 @@ class _FavouriteItemsState extends State<FavouriteItems> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Product(),
+                          builder: (context) => Product(productData: {},),
                         ),
                       );
                     },

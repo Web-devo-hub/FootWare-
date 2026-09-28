@@ -120,7 +120,7 @@ class _WalletState extends State<Wallet> {
                         ),
                         Container(
                           // color: Colors.red,
-                          width: 245,
+                          width: 280,
                           height: 145,
                           child: Padding(
                             padding: EdgeInsets.symmetric(vertical: 20),

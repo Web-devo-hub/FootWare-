@@ -7,29 +7,42 @@ class Assets {
   Assets._();
 
   static const AssetGenImage shoeImage = AssetGenImage('assets/ShoeImage.jpeg');
+  static const AssetGenImage amex = AssetGenImage('assets/amex.png');
   static const SvgGenImage apple = SvgGenImage('assets/apple.svg');
   static const AssetGenImage bop = AssetGenImage('assets/bop.png');
+  static const AssetGenImage chip = AssetGenImage('assets/chip.png');
+  static const AssetGenImage discover = AssetGenImage('assets/discover.png');
+  static const AssetGenImage elo = AssetGenImage('assets/elo.png');
   static const SvgGenImage facebook = SvgGenImage('assets/facebook.svg');
   static const SvgGenImage google = SvgGenImage('assets/google.svg');
+  static const AssetGenImage hipercard = AssetGenImage('assets/hipercard.png');
   static const SvgGenImage icons8Facebook = SvgGenImage(
-      'assets/icons8-facebook.svg');
+    'assets/icons8-facebook.svg',
+  );
   static const SvgGenImage icons8Paypal = SvgGenImage(
-      'assets/icons8-paypal.svg');
+    'assets/icons8-paypal.svg',
+  );
   static const AssetGenImage images = AssetGenImage('assets/images.jpeg');
   static const AssetGenImage juti = AssetGenImage('assets/juti.jpeg');
   static const AssetGenImage kaifshoes = AssetGenImage('assets/kaifshoes.jpeg');
   static const SvgGenImage master = SvgGenImage('assets/master.svg');
-  static const SvgGenImage mastercard = SvgGenImage('assets/mastercard.svg');
+  static const AssetGenImage mastercardPng = AssetGenImage(
+    'assets/mastercard.png',
+  );
+  static const SvgGenImage mastercardSvg = SvgGenImage('assets/mastercard.svg');
+  static const AssetGenImage mir = AssetGenImage('assets/mir.png');
   static const SvgGenImage nike = SvgGenImage('assets/nike.svg');
+  static const AssetGenImage rupay = AssetGenImage('assets/rupay.png');
   static const AssetGenImage shoe = AssetGenImage('assets/shoe.jpeg');
   static const AssetGenImage shoesred = AssetGenImage('assets/shoesred.jpeg');
+  static const AssetGenImage unionpay = AssetGenImage('assets/unionpay.png');
+  static const AssetGenImage visa = AssetGenImage('assets/visa.png');
 }
 
 class AssetGenImage {
   const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
-
 
   final Size? size;
   final Set<String> flavors;
@@ -87,15 +100,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   Widget custom({
@@ -167,4 +173,3 @@ class SvgGenImage {
 
   String get keyName => _assetName;
 }
-

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:footware/constants/constants.dart';
 
 import '../Cart/checkout.dart';
 
 class Product extends StatefulWidget {
-  const Product({super.key});
+  const Product({super.key, required this.productData});
+
+  final Map<String, dynamic> productData;
 
   @override
   State<Product> createState() => _ProductState();
@@ -24,7 +27,7 @@ class _ProductState extends State<Product> {
           Stack(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * 0.44,
                 width: double.infinity,
                 // decoration: BoxDecoration(
                 //   boxShadow: [
@@ -47,7 +50,7 @@ class _ProductState extends State<Product> {
                       width: MediaQuery.of(context).size.width * 1,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("assets/kaifshoes.jpeg"),
+                          image: NetworkImage(widget.productData["image"]),
                           fit: BoxFit.fill,
                         ),
                         // borderRadius: BorderRadius.circular(30),
@@ -56,59 +59,59 @@ class _ProductState extends State<Product> {
                   },
                 ),
               ),
-              Positioned(
-                top: 315,
-                left: MediaQuery.of(context).size.width * 0.435,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 6,
-                      height: 6,
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.shade200,
-                      ),
-                    ),
-                    Container(
-                      width: 6,
-                      height: 6,
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.shade200,
-                      ),
-                    ),
-                    Container(
-                      width: 6,
-                      height: 6,
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.shade200,
-                      ),
-                    ),
-                    Container(
-                      width: 6,
-                      height: 6,
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.shade200,
-                      ),
-                    ),
-                    Container(
-                      width: 6,
-                      height: 6,
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.shade200,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Positioned(
+              //   top: 315,
+              //   left: MediaQuery.of(context).size.width * 0.435,
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         width: 6,
+              //         height: 6,
+              //         margin: EdgeInsets.symmetric(horizontal: 1),
+              //         decoration: BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: Colors.grey.shade200,
+              //         ),
+              //       ),
+              //       Container(
+              //         width: 6,
+              //         height: 6,
+              //         margin: EdgeInsets.symmetric(horizontal: 1),
+              //         decoration: BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: Colors.grey.shade200,
+              //         ),
+              //       ),
+              //       Container(
+              //         width: 6,
+              //         height: 6,
+              //         margin: EdgeInsets.symmetric(horizontal: 1),
+              //         decoration: BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: Colors.grey.shade200,
+              //         ),
+              //       ),
+              //       Container(
+              //         width: 6,
+              //         height: 6,
+              //         margin: EdgeInsets.symmetric(horizontal: 1),
+              //         decoration: BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: Colors.grey.shade200,
+              //         ),
+              //       ),
+              //       Container(
+              //         width: 6,
+              //         height: 6,
+              //         margin: EdgeInsets.symmetric(horizontal: 1),
+              //         decoration: BoxDecoration(
+              //           shape: BoxShape.circle,
+              //           color: Colors.grey.shade200,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
           Container(
@@ -123,7 +126,7 @@ class _ProductState extends State<Product> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "AirJordan 3 Retro",
+                      widget.productData["name"],
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -145,7 +148,7 @@ class _ProductState extends State<Product> {
                       width: 50,
                       height: 18,
                       child: Text(
-                        "8370 sold",
+                        "${widget.productData["itemsSold"]}",
                         style: TextStyle(color: Colors.black, fontSize: 8),
                       ),
                     ),
@@ -155,7 +158,7 @@ class _ProductState extends State<Product> {
                     SizedBox(width: 5),
 
                     Text(
-                      "4.5",
+                      "${widget.productData["rating"]}",
                       style: TextStyle(color: Colors.black, fontSize: 13),
                     ),
                     SizedBox(width: 5),
@@ -167,7 +170,8 @@ class _ProductState extends State<Product> {
                     //   ),
                     // ),
                     Text(
-                      "(8,370 reviews)",
+                      "(${widget.productData["ratingCount"]} reviews)",
+
                       style: TextStyle(color: Colors.black, fontSize: 10),
                     ),
                   ],
@@ -187,7 +191,7 @@ class _ProductState extends State<Product> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Stylish, comfortable, and built for everyday wear comfortable, and built for everyday wear.",
+                  "${widget.productData["description"]}",
                   style: TextStyle(color: Colors.grey, fontSize: 15),
                 ),
 
@@ -213,7 +217,7 @@ class _ProductState extends State<Product> {
                           height: 50,
                           child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: 10,
+                            itemCount: widget.productData["sizes"].length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               bool isSelected = selectedIndex == index;
@@ -236,7 +240,7 @@ class _ProductState extends State<Product> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      "41",
+                                      "${widget.productData["sizes"][index]}",
                                       style: TextStyle(
                                         color: isSelected
                                             ? Colors.white
@@ -272,7 +276,7 @@ class _ProductState extends State<Product> {
                           height: 50,
                           child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: 10,
+                            itemCount: widget.productData["colors"].length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               bool isSelected = colorSelectedIndex == index;
@@ -289,10 +293,9 @@ class _ProductState extends State<Product> {
                                   height: 35,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: index.isEven
-                                        ? Colors.red
-                                        : Colors.purple,
-                                    // border: BoxBorder.all(width: 1.5,color: Colors.grey),
+                                    color: Color(
+                                      widget.productData["colors"][index],
+                                    ),
                                   ),
                                   child: isSelected
                                       ? Icon(
@@ -362,13 +365,43 @@ class _ProductState extends State<Product> {
                       ),
                     ),
                     SizedBox(
-                      width: 220,
+                      width: 200,
                       child: TextButton.icon(
                         onPressed: () {
-                          // Add to cart logic
+                          final alreadyAdded = SingletonList.cartItems?.any(
+                                (item) => item["name"] == widget.productData["name"],
+                          );
+
+                          if (!alreadyAdded!) {
+                            final cartProduct = {
+                              "size": widget.productData["sizes"][selectedIndex],
+                              "name": widget.productData["name"],
+                              "image": widget.productData["image"],
+                              "rating": widget.productData["rating"],
+                              "price": widget.productData["price"],
+                              "color": widget.productData["colors"][colorSelectedIndex],
+                              "quantity": counter,
+                              // "price": widget.productData["price"][selectedIndex],
+                            };
+
+                            SingletonList.cartItems?.add(cartProduct);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Added to cart")),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Item already added to cart")),
+                            );
+                          }
                         },
-                        icon: Icon(Icons.shopping_bag_outlined),
-                        label: Text("Add to Cart"),
+                        icon: Icon(
+                          Icons.shopping_bag_outlined,
+                          color: Colors.black,
+                        ),
+                        label: Text(
+                          "Add to Cart",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
                       ),
                     ),
                   ],
@@ -390,7 +423,7 @@ class _ProductState extends State<Product> {
                           ),
                         ),
                         Text(
-                          "\$585.00",
+                          "Rs. ${widget.productData["price"]*counter}",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -409,9 +442,22 @@ class _ProductState extends State<Product> {
                       ),
                       child: TextButton.icon(
                         onPressed: () {
+                          final checkOutProduct = {
+                            "size": widget.productData["sizes"][selectedIndex],
+                            "name": widget.productData["name"],
+                            "image": widget.productData["image"],
+                            "rating": widget.productData["rating"],
+                            "price": widget.productData["price"]*counter,
+                            "color": widget.productData["colors"][colorSelectedIndex],
+                            "quantity": counter,
+                            // "price": widget.productData["price"][selectedIndex],
+                          };
+                          final List<Map<String, dynamic>> navItems = [];
+                          navItems.add(checkOutProduct);
+
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Checkout()),
+                            MaterialPageRoute(builder: (context) => Checkout(checkoutItems: navItems, isFromProductDescription: true,)),
                           );
                         },
                         label: Text(

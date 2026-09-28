@@ -22,6 +22,7 @@ class CustomInputField extends StatelessWidget {
   final VoidCallback? onEditingComplete;
   final TapRegionCallback? onTapOutside;
   final FocusNode? focusNode;
+  // final TextEditingController;
   // final TextInputAction? textInputAction;
 
   @override

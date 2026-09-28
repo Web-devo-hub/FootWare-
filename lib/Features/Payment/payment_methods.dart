@@ -8,10 +8,11 @@ import 'addcard.dart';
 import 'enter_pin_page.dart';
 
 class PaymentMethods extends StatefulWidget {
-  PaymentMethods({super.key, required this.isNavigatedFromProfile});
+  const PaymentMethods({super.key, required this.isNavigatedFromProfile,  this.cardHoldername, this.cardNumber});
 
   final bool isNavigatedFromProfile;
-
+  final String?  cardHoldername;
+  final String? cardNumber;
   @override
   State<PaymentMethods> createState() => _PaymentMethodsState();
 }
@@ -44,9 +45,9 @@ class _PaymentMethodsState extends State<PaymentMethods> {
         actions: [
           // IconButton(onPressed: () {}, icon: Icon(Icons.search_sharp)),
           Container(
-            margin: EdgeInsets.only(right: 13),
-            width: 23,
-            height: 23,
+            margin: EdgeInsets.only(right: 20),
+            width: 45,
+            height: 45,
             // color: Colors.red,
             decoration: BoxDecoration(
               // color: Colors.red,
@@ -55,7 +56,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(Icons.add, size: 15)],
+              children: [IconButton(onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=> AddCard())); }, icon: Icon(Icons.add))],
             ),
           ),
         ],
