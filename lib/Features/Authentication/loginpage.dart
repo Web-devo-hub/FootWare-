@@ -4,6 +4,7 @@ import 'package:footware/Features/Authentication/signup.dart';
 // import 'package:footware/features/Authentication/signup.dart';
 import 'package:footware/widget/button.dart';
 import 'package:footware/widget/inputfield.dart';
+import 'package:get/get.dart';
 
 import '../../widget/iconbadge.dart';
 import '../../widget/navigationbar.dart';
@@ -117,10 +118,11 @@ class _LogInPageState extends State<LogInPage> {
                     );
                     return;
                   }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => KNavigationBar()),
-                  );
+                  Get.off(()=> KNavigationBar());
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => KNavigationBar()),
+                  // );
                 },
               ),
               SizedBox(height: 10),
@@ -190,10 +192,12 @@ class _LogInPageState extends State<LogInPage> {
                       text: "Sign up",
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          ); //add signup route here
+                        Get.off(()=> SignUp());
+
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => SignUp()),
+                          // ); //add signup route here
                         },
                       style: TextStyle(
                         color: Colors.black,

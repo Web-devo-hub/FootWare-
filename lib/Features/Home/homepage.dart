@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:footware/Features/Home/product_category.dart';
-import 'package:footware/Features/Home/product_description.dart';
+import 'package:footware/Features/2B%20vission%20Project/filter_bottom_sheet.dart';
+import 'package:footware/Features/Home/Product_controller/product_category.dart';
+import 'package:footware/Features/Home/Product_controller/product_description.dart';
 import 'package:footware/constants/dome_constant_data.dart';
-
+import 'package:flutter/material.dart';
 import 'package:footware/widget/inputfield.dart';
+import 'package:get/get.dart';
 
 import 'favourite_items.dart';
 
-// import '../Product/favourite_items.dart';
-// import '../Product/product_category.dart';
-// import '../Product/product_description.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -82,10 +80,11 @@ class _HomePageState extends State<HomePage> {
           IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.bell)),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FavouriteItems()),
-              );
+              Get.to(()=> FavouriteItems());
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => FavouriteItems()),
+              // );
             },
             icon: FaIcon(FontAwesomeIcons.heart),
           ),
@@ -115,7 +114,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(()=> PatientBottomSheet());
+                      
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>PatientBottomSheet()));
+                    },
                     child: Text(
                       "See All",
                       style: TextStyle(
@@ -197,13 +200,15 @@ class _HomePageState extends State<HomePage> {
                     final category = jsonData["categories"][index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ItemCategory(category: category),
-                          ),
-                        );
+                        Get.to(()=> ItemCategory(category: category));
+                        
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         ItemCategory(category: category),
+                        //   ),
+                        // );
                       },
                       child: SizedBox(
                         height: 80,
@@ -285,13 +290,15 @@ class _HomePageState extends State<HomePage> {
                     var isSelected = selectedIndex == index;
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Product(productData: mostPopular),
-                          ),
-                        );
+                        Get.to(()=> Product(productData: mostPopular));
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         Product(productData: mostPopular),
+                        //   ),
+                        // );
                       },
                       child: SizedBox(
                         height: 80,

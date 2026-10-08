@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:footware/Features/Home/product_description.dart';
+import 'package:footware/Features/Home/Product_controller/product_description.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 // import 'package:footware/Home/product_description.dart';
 
 class ItemCategory extends StatefulWidget {
@@ -61,12 +63,13 @@ class _ItemCategoryState extends State<ItemCategory> {
             var isSelectedShoe = selectedShoeIndex==shoeIndex;
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Product(productData: categoryItem),
-                  ),
-                );
+                Get.to(()=> Product(productData: categoryItem),);
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => Product(productData: categoryItem),
+                //   ),
+                // );
               },
               child: SizedBox(
                 height: 80,

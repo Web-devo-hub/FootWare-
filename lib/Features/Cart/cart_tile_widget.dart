@@ -51,7 +51,6 @@ class _CartTileWidgetState extends State<CartTileWidget> {
 
         child: Row(
           children: [
-            // ---------------- IMAGE ----------------
             Container(
               margin: const EdgeInsets.only(right: 10),
               width: 110,

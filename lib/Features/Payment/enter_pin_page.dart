@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 // import 'package:footware/Order/Order.dart';
 // import 'package:footware/Order/trackorder.dart';
 // import 'package:footware/Wallet/wallet.dart';
 import 'package:pinput/pinput.dart';
-
 import '../../features/Order/trackorder.dart';
 import '../Order/Order.dart';
 
@@ -53,8 +53,9 @@ class _EnterPinPageState extends State<EnterPinPage> {
               child: TextButton.icon(
                 onPressed: () {
                   showDialog(
+
                     context: context,
-                    barrierDismissible: false,
+                    barrierDismissible: true,
                     builder: (context) {
                       return Center(
                         child: Container(
@@ -83,11 +84,23 @@ class _EnterPinPageState extends State<EnterPinPage> {
                                 ),
                               ),
 
-                              Text("Order Successful!",style: TextStyle(fontSize: 25,color: Colors.black),),
-                              SizedBox(height: 20,),
+                              Text(
+                                "Order Successful!",
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 20),
 
-                              Text("You have successfully made order",style: TextStyle(fontSize: 15,color: Colors.black),),
-                              SizedBox(height: 20,),
+                              Text(
+                                "You have successfully made order",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 20),
 
                               Container(
                                 width: 270,
@@ -100,17 +113,21 @@ class _EnterPinPageState extends State<EnterPinPage> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => OrderPage()),
+                                      MaterialPageRoute(
+                                        builder: (context) => OrderPage(),
+                                      ),
                                     );
                                   },
                                   label: Text(
                                     "View Order",
-                                    style: TextStyle(color: Colors.white,fontSize: 18),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
                                   ),
-
                                 ),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(height: 10),
                               Container(
                                 width: 270,
                                 height: 60,
@@ -122,14 +139,18 @@ class _EnterPinPageState extends State<EnterPinPage> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => TrackOrder()),
+                                      MaterialPageRoute(
+                                        builder: (context) => TrackOrder(),
+                                      ),
                                     );
                                   },
                                   label: Text(
                                     "Track Order",
-                                    style: TextStyle(color: Colors.white,fontSize: 18),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
                                   ),
-
                                 ),
                               ),
                             ],
@@ -151,116 +172,4 @@ class _EnterPinPageState extends State<EnterPinPage> {
   }
 }
 
-//Container(
-//               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-//               width: double.infinity,
-//               height: 270,
-//               color: Colors.grey.shade100,
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "1",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "2",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "3",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "4",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "5",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "6",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "7",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "8",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         "9",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Container(
-//                         width: 20,
-//                         height: 20,
-//                         child: Text(
-//                           "*",
-//                           style: TextStyle(
-//                             fontSize: 23,
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                       ),
-//                       Text(
-//                         "0",
-//                         style: TextStyle(
-//                           fontSize: 22,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Icon(Icons.backspace_outlined, size: 20),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
+

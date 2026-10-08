@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:footware/Features/Cart/checkout_controller.dart';
 import 'package:footware/constants/constants.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../Payment/payment_methods.dart';
 
@@ -20,18 +24,22 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
-  double totalPrice() {
-    double total = 0;
+  late final CheckoutController controller = Get.put(
+    CheckoutController(checkoutItems: widget.checkoutItems, isFromProductDescription: widget.isFromProductDescription),
+  );
 
-    for (var item in widget.checkoutItems) {
-      double price = (item["price"] ?? 0).toDouble();
-      int quantity = item["quantity"] ?? 1;
-
-      total += price * quantity;
-    }
-
-    return total;
-  }
+  // double totalPrice() {
+  //   double total = 0;
+  //
+  //   for (var item in widget.checkoutItems) {
+  //     double price = (item["price"] ?? 0).toDouble();
+  //     int quantity = item["quantity"] ?? 1;
+  //
+  //     total += price * quantity;
+  //   }
+  //
+  //   return total;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -421,7 +429,7 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Amount", style: TextStyle(color: Colors.grey)),
-                        Text("Rs. ${totalPrice().toStringAsFixed(0)}"),
+                        Text("Rs. ${controller.totalPrice().toStringAsFixed(0)}"),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -429,7 +437,7 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Shipping", style: TextStyle(color: Colors.grey)),
-                        Text("\$15.00"),
+                        Text("Rs 15.00"),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -437,7 +445,7 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Promo", style: TextStyle(color: Colors.grey)),
-                        Text("\$-175.00"),
+                        Text("Rs. -175.00"),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -447,7 +455,9 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Total", style: TextStyle(color: Colors.grey)),
-                        Text("Rs. ${(totalPrice()-174+15).toStringAsFixed(0)}"),
+                        Text(
+                          " Rs. ${(controller.totalPrice() - 174 + 15).toStringAsFixed(0)}",
+                        ),
                       ],
                     ),
                   ],
@@ -465,13 +475,14 @@ class _CheckoutState extends State<Checkout> {
                 ),
                 child: TextButton.icon(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            PaymentMethods(isNavigatedFromProfile: false),
-                      ),
-                    );
+                    Get.to(() => PaymentMethods(isNavigatedFromProfile: false));
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         PaymentMethods(isNavigatedFromProfile: false),
+                    //   ),
+                    // );
                   },
                   label: Text(
                     "Continue to payment",

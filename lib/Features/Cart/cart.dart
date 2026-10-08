@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:footware/Features/Cart/cart_controller.dart';
 import 'package:footware/constants/constants.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import 'cart_tile_widget.dart';
 import 'checkout.dart';
@@ -7,35 +11,35 @@ import 'checkout.dart';
 class CartPage extends StatefulWidget {
   CartPage({super.key});
 
-  List<Map<String, dynamic>>? localCheckoutListItems = [];
+  // List<Map<String, dynamic>>? localCheckoutListItems = [];
 
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  var quantities;
+  final CartController controller = Get.put(CartController());
 
-  @override
+
+@override
   void initState() {
     super.initState();
-    widget.localCheckoutListItems = List.from(SingletonList.cartItems!);
-    quantities = List.filled(widget.localCheckoutListItems?.length ?? 0, 1);
+    controller.onInit();
+
   }
-
-  double getTotalPrice() {
-    double total = 0;
-
-    for (int i = 0; i < (widget.localCheckoutListItems?.length ?? 0); i++) {
-      final item = SingletonList.cartItems![i];
-
-      double price = (item["price"] ?? 0).toDouble();
-
-      total += price * quantities[i];
-    }
-
-    return total;
-  }
+  // double getTotalPrice() {
+  //   double total = 0;
+  //
+  //   for (int i = 0; i < (widget.localCheckoutListItems?.length ?? 0); i++) {
+  //     final item = SingletonList.cartItems![i];
+  //
+  //     double price = (item["price"] ?? 0).toDouble();
+  //
+  //     total += price * quantities[i];
+  //   }
+  //
+  //   return total;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -70,40 +74,35 @@ class _CartPageState extends State<CartPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SizedBox(
                 width: double.infinity,
-                child: ListView.builder(
-                  itemCount: widget.localCheckoutListItems?.length ?? 0,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
+                child :   Obx(
+                      () => ListView.builder(
+                    itemCount: controller.localCheckoutListItems.length ,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
 
-                  itemBuilder: (BuildContext context, int index) {
-                    final cartProduct = widget.localCheckoutListItems![index];
+                    itemBuilder: (BuildContext context, int index) {
+                      final cartProduct = controller.localCheckoutListItems.value[index];
 
-                    return CartTileWidget(
-                      imageLocation: "${cartProduct["image"]}",
-                      productName: "${cartProduct["name"]}",
-                      productPrice: "Rs.${cartProduct["price"]}",
-                      colorValue: cartProduct["color"],
-                      sizeValue: cartProduct["size"],
-                      quantity: quantities[index]= widget.localCheckoutListItems?[index]["quantity"],
-                      onQuantityChanged: (newQuantity) {
-                        setState(() {
-                          quantities[index] = newQuantity;
-                          widget.localCheckoutListItems![index]["quantity"] = newQuantity;
-                        });
-                      },
-                      onDelete: () {
-                        setState(() {
-                          SingletonList.cartItems?.removeAt(index);
-                          widget.localCheckoutListItems?.removeAt(index);
-                          // quantities.removeAt(index);
-                        });
-                      },
-                    );
-                  },
+                      return Obx((){
+                        return CartTileWidget(
+                          imageLocation: "${cartProduct["image"]}",
+                          productName: "${cartProduct["name"]}",
+                          productPrice: "Rs.${cartProduct["price"]}",
+                          colorValue: cartProduct["color"],
+                          sizeValue: cartProduct["size"],
+                          quantity: controller.quantities[index],
+                          onQuantityChanged: (onchange) => controller.setQuantity(index, onchange),
+                          onDelete: () => controller.removeAt(index),
+                        );
+                      }
+                      );
+                    },
+                  ),
+                )
                 ),
               ),
             ),
-          ),
+
 
           // ---------------- TOTAL PRICE ----------------
           Container(
@@ -131,13 +130,16 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ),
 
-                      Text(
-                        "Rs. ${getTotalPrice().toStringAsFixed(0)}",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Obx((){
+                        return Text(
+                          "Rs. ${controller.TotalPrice.toStringAsFixed(0)}",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      }
                       ),
                     ],
                   ),
@@ -152,17 +154,23 @@ class _CartPageState extends State<CartPage> {
 
                     child: TextButton.icon(
                       onPressed: () {
+                        Get.to(()=> Checkout(
+                          isFromProductDescription: false,
+                          checkoutItems:
+                          List.from(controller.localCheckoutListItems ) ,
+                        ),);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Checkout(
-                              isFromProductDescription: false,
-                              checkoutItems:
-                                 List.from(widget.localCheckoutListItems ?? []) ,
-                            ),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //
+                        //   MaterialPageRoute(
+                        //     builder: (context) => Checkout(
+                        //       isFromProductDescription: false,
+                        //       checkoutItems:
+                        //          List.from(controller.localCheckoutListItems ?? []) ,
+                        //     ),
+                        //   ),
+                        // );
                       },
 
                       label: const Text(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:footware/widget/button.dart';
 import 'package:footware/widget/inputfield.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'loginpage.dart';
 
@@ -120,12 +122,13 @@ class _SignUpState extends State<SignUp> {
                       text: "Sign in",
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LogInPage(),
-                            ),
-                          ); //add signup route here
+                        Get.to(()=> LogInPage());
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => LogInPage(),
+                          //   ),
+                          // ); //add signup route here
                         },
                       style: TextStyle(
                         color: Colors.black,

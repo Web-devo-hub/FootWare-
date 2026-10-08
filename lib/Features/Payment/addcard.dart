@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:footware/Features/Payment/payment_methods.dart';
-
+import 'package:footware/Features/2B%20vission%20Project/filter_bottom_sheet.dart';
 // import 'package:footware/Payment/payment_methods.dart';
 import 'package:footware/widget/inputfield.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../Core/sharedprefrences/shared_preferences.dart';
 
@@ -214,7 +216,7 @@ class _AddCardState extends State<AddCard> {
                   child: TextButton.icon(
                     onPressed: () async{
       
-                      final checkOutProduct = {
+                      final cardDetails = {
                         "cardNumber": numberEditingController.text,
                         "brandName" : selectedCardType?.name,
                         "cvvNumber" : cvvEditingController.text,
@@ -222,16 +224,16 @@ class _AddCardState extends State<AddCard> {
                         "cardholderName": textEditingController.text,
                       };
 
-                        await SharedPreferencesClient.instance.setCardInfo(checkOutProduct);
+                        await SharedPreferencesClient.instance.setCardInfo(cardDetails);
                         var Temp =  await SharedPreferencesClient.instance.getCardsInfo();
                         print("saved data: $Temp");
-
-      
-                      // Numberavigator.push(
+                      
+                        Get.to(()=> PaymentMethods(isNavigatedFromProfile: true));
+                      // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(
                       //     builder: (context) =>
-                      //         PaymentMethods(isNavigatedFromProfile: true , cardNumber: numberEditingController.text,),
+                      //         PaymentMethods(isNavigatedFromProfile: true),
                       //   ),
                       // );
                     },
