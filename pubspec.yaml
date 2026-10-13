@@ -41,6 +41,7 @@ dependencies:
   easy_stepper: ^1.2.0
   shared_preferences: ^2.5.5
   get: ^4.7.3
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:

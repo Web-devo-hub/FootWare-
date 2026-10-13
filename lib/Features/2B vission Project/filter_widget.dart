@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:footware/theme_controller.dart';
+// import 'package:footware/theme_controller.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({
@@ -24,7 +24,7 @@ class FilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = AppColors.of(context);
+    // final c = AppColors.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -32,10 +32,10 @@ class FilterWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.44,
         height: 120,
         decoration: BoxDecoration(
-          color: c.cardBg, // CHANGED
+          // color: c.cardBg, // CHANGED
           border: Border.all(
             width: isSelected ? 2 : 0.2,
-            color: isSelected ? Color(0xFF38BDF8) : c.cardBorder, // CHANGED
+            color:  Color(0xFF38BDF8) , // CHANGED
           ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
@@ -59,7 +59,7 @@ class FilterWidget extends StatelessWidget {
               Text(
                 widgetName,
                 style: TextStyle(
-                  color: c.cardText, // CHANGED
+                  // color: c.cardText, // CHANGED
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,7 +78,7 @@ class FilterWidget extends StatelessWidget {
                   contentPadding: EdgeInsets.all(13),
                   hintText: widgetDescription,
                   hintStyle:  TextStyle(
-                    color: c.hint, // CHANGED
+                    // color: c.hint, // CHANGED
                     fontSize: 11,
                   ),
                 ),

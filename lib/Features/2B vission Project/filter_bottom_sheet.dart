@@ -1,72 +1,62 @@
 import 'package:flutter/material.dart';
+
+// import 'package:footware/Features/2B%20vission%20Project/bottomsheetcontroller.dart';
 import 'package:footware/Features/2B%20vission%20Project/filter_widget.dart';
-import 'package:footware/theme_controller.dart';
+
+// import 'package:footware/theme_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-class PatientBottomSheet extends StatefulWidget {
-  const PatientBottomSheet({super.key});
+import 'bottomsheetcontroller.dart';
 
-  @override
-  State<PatientBottomSheet> createState() => _PatientBottomSheetState();
-}
+class PatientBottomSheet extends StatelessWidget {
+  PatientBottomSheet({super.key});
 
-class _PatientBottomSheetState extends State<PatientBottomSheet> {
-  bool isStatOnly = false;
-  final Set<String> selectedSorts = {};
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController patientNameController = TextEditingController();
-  final TextEditingController accessionController = TextEditingController();
-  final TextEditingController orderNumberController = TextEditingController();
+  // bool isStatOnly = false;
 
-  void toggleSort(String key, void Function(void Function()) setModalState) {
-    setModalState(() {
-      if (selectedSorts.contains(key)) {
-        selectedSorts.remove(key);
-      } else {
-        selectedSorts.add(key);
-      }
-    });
-  }
+  final BottomSheetController controller = Get.put(BottomSheetController());
 
-  int get selectedCount => [
-    patientNameController,
-    dateController,
-    accessionController,
-    orderNumberController,
-  ].where((c) => c.text.trim().isNotEmpty).length;
+  // final Set<String> selectedSorts = {};
+  //
+  // final TextEditingController dateController = TextEditingController();
+  //
+  // final TextEditingController patientNameController = TextEditingController();
+  //
+  // final TextEditingController accessionController = TextEditingController();
+  //
+  // final TextEditingController orderNumberController = TextEditingController();
 
-  int get activeCount => selectedCount + (isStatOnly ? 1 : 0);
+  // void toggleSort(String key, void Function(void Function()) setModalState) {
+  //   setModalState(() {
+  //     if (selectedSorts.contains(key)) {
+  //       selectedSorts.remove(key);
+  //     } else {
+  //       selectedSorts.add(key);
+  //     }
+  //   });
+  // }
 
-  Future<void> pickDate(StateSetter setModalState) async {
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null) {
-      setModalState(() {
-        dateController.text = "${picked.day}/${picked.month}/${picked.year}";
-      });
-    }
-  }
+  // int get selectedCount => [
+  //   patientNameController,
+  //   dateController,
+  //   accessionController,
+  //   orderNumberController,
+  // ].where((c) => c.text.trim().isNotEmpty).length;
 
-  @override
-  @override
-  void initState() {
-    patientNameController.addListener(() {
-      setState(() {});
-    });
-    accessionController.addListener(() {
-      setState(() {});
-    });
-    orderNumberController.addListener(() {
-      setState(() {});
-    });
+  // int get activeCount => selectedCount + (isStatOnly ? 1 : 0);
 
-    super.initState();
-  }
+  // Future<void> pickDate(StateSetter setModalState) async {
+  //   final picked = await showDatePicker(
+  //     context: setModalState,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2020),
+  //     lastDate: DateTime(2100),
+  //   );
+  //   if (picked != null) {
+  //     setModalState(() {
+  //       dateController.text = "${picked.day}/${picked.month}/${picked.year}";
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +65,17 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
         backgroundColor: Colors.greenAccent,
         toolbarHeight: 100,
         actions: [
-          IconButton(onPressed: (){
-            Get.changeThemeMode(ThemeMode.light);
-          }, icon : Icon(Icons.light_mode),
+          IconButton(
+            onPressed: () {
+              // Get.changeThemeMode(ThemeMode.light);
+            },
+            icon: Icon(Icons.light_mode),
           ),
-          IconButton(onPressed: (){
-            Get.changeThemeMode(ThemeMode.dark);
-          }, icon : Icon(Icons.dark_mode),
+          IconButton(
+            onPressed: () {
+              // Get.changeThemeMode(ThemeMode.dark);
+            },
+            icon: Icon(Icons.dark_mode),
           ),
           // ValueListenableBuilder<ThemeMode>(
           //   valueListenable: themeNotifier,
@@ -104,11 +98,11 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
         onPressed: () {
           showModalBottomSheet(
             constraints: BoxConstraints(
-                maxWidth: double.infinity,
+              maxWidth: double.infinity,
               maxHeight: MediaQuery.of(context).size.height * 0.8,
             ),
             useSafeArea: true,
-            backgroundColor: AppColors.of(context).sheetBg, // CHANGED
+            // backgroundColor: AppColors.of(context).sheetBg, // CHANGED
             isScrollControlled: true,
             barrierColor: Colors.transparent,
             shape: OutlineInputBorder(
@@ -120,9 +114,8 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
             isDismissible: true,
             context: context,
             builder: (context) {
-              return StatefulBuilder(
-                builder: (context, setModalState) {
-                  final c = AppColors.of(context);
+              return GetBuilder<BottomSheetController>(
+                builder: (controller) {
                   return SingleChildScrollView(
                     padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -139,7 +132,6 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                             height: 5,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: c.handle, // CHANGED
                             ),
                           ),
                         ),
@@ -155,7 +147,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                               Text(
                                 "Sort & Filter",
                                 style: TextStyle(
-                                  color: c.title, // CHANGED
+                                  // color: c.title, // CHANGED
                                   fontSize: 23,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -175,7 +167,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                     BoxShadow(
                                       color: Color(
                                         0xFF2F9CCE,
-                                      ).withOpacity(0.25),
+                                      ).withValues(alpha: 0.25),
                                       blurRadius: 10,
                                       spreadRadius: 1,
                                       offset: Offset(0, 0),
@@ -184,7 +176,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Icon(
                                       Icons.circle,
@@ -192,7 +184,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                       size: 10,
                                     ),
                                     Text(
-                                      "$activeCount  Active",
+                                      "${controller.activeCount().toString()} Active",
                                       style: TextStyle(
                                         color: Color(0xFF2F9CCE),
                                         fontSize: 15,
@@ -206,20 +198,12 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                               // SizedBox(height: 20,),
                               TextButton(
                                 onPressed: () {
-
-                                  setModalState(() {
-                                    selectedSorts.clear();
-                                    patientNameController.clear();
-                                    dateController.clear();
-                                    accessionController.clear();
-                                    orderNumberController.clear();
-                                    isStatOnly = false;
-                                  });
+                                  controller.clearBottomSheet();
                                 },
                                 child: Text(
                                   "Reset All",
                                   style: TextStyle(
-                                    color: c.subtitle, // CHANGED
+                                    // color: c.subtitle, // CHANGED
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -228,7 +212,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                             ],
                           ),
                         ),
-                        Divider(color: c.divider), // CHANGED
+                        // Divider(color: c.divider), // CHANGED
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
@@ -236,20 +220,20 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.swap_vert, color: c.icon), // CHANGED
+                                  // Icon(Icons.swap_vert, color: c.icon), // CHANGED
                                   Text(
                                     "SORT ORDERS BY",
                                     style: TextStyle(
-                                      color: c.subtitle, // CHANGED
+                                      // color: c.subtitle, // CHANGED
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
                                   ),
                                   Spacer(),
                                   Text(
-                                    " $selectedCount Selected",
+                                    " ${controller.selectedCount.toString()} Selected",
                                     style: TextStyle(
-                                      color: c.subtitle, // CHANGED
+                                      // color: c.subtitle, // CHANGED
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -260,15 +244,13 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
 
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   FilterWidget(
-                                    onChanged: (_) => setModalState(() {}),
-                                    isSelected: patientNameController.text
-                                        .trim()
-                                        .isNotEmpty,
+                                    onChanged: (_) => controller.update(),
+                                    isSelected: controller.patientNameController.text.trim().isNotEmpty,
                                     onTap: () =>
-                                        toggleSort('patient', setModalState),
+                                        controller.toggleSort('patient'),
                                     widgetIcon: Icons.person_outline,
                                     widgetName: "Patient Name :",
                                     widgetDescription: "Alphabetical order",
@@ -318,17 +300,17 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                         ],
                                       ),
                                     ),
-                                    controller: patientNameController,
+                                    controller:
+                                        controller.patientNameController,
                                   ),
                                   FilterWidget(
-                                    onChanged: (_) => setModalState(() {}),
+                                    onChanged: (_) => controller.update(),
                                     onTapOfEnterText: () =>
-                                        pickDate(setModalState),
-                                    isSelected: dateController.text
+                                        controller.pickDate(context),
+                                    isSelected: controller.dateController.text
                                         .trim()
                                         .isNotEmpty,
-                                    onTap: () =>
-                                        toggleSort('date', setModalState),
+                                    onTap: () => controller.toggleSort('date'),
                                     widgetIcon: Icons.calendar_today_outlined,
                                     widgetName: "Date :",
                                     widgetDescription: "Order assigned time",
@@ -339,7 +321,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                         fontSize: 13,
                                       ),
                                     ),
-                                    controller: dateController,
+                                    controller: controller.dateController,
                                   ),
                                 ],
                               ),
@@ -347,17 +329,19 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
 
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   FilterWidget(
-                                    onChanged: (_) => setModalState(() {}),
+                                    onChanged: (_) => controller.update(),
 
-                                    isSelected: accessionController.text
+                                    isSelected: controller
+                                        .accessionController
+                                        .text
                                         .trim()
                                         .isNotEmpty,
 
                                     onTap: () =>
-                                        toggleSort('accession', setModalState),
+                                        controller.toggleSort('accession'),
                                     widgetIcon: Icons.tag_outlined,
                                     widgetName: "Accession #",
                                     widgetDescription: "Numerical order",
@@ -368,15 +352,16 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                         fontSize: 13,
                                       ),
                                     ),
-                                    controller: accessionController,
+                                    controller: controller.accessionController,
                                   ),
                                   FilterWidget(
-                                    onChanged: (_) => setModalState(() {}),
-                                    isSelected: orderNumberController.text
+                                    onChanged: (_) => controller.update(),
+                                    isSelected: controller
+                                        .orderNumberController
+                                        .text
                                         .trim()
                                         .isNotEmpty,
-                                    onTap: () =>
-                                        toggleSort('order', setModalState),
+                                    onTap: () => controller.toggleSort('order'),
                                     widgetIcon: Icons.receipt_long,
                                     widgetName: "Order Number #",
                                     widgetDescription: "Numerical order",
@@ -387,7 +372,8 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                         fontSize: 13,
                                       ),
                                     ),
-                                    controller: orderNumberController,
+                                    controller:
+                                        controller.orderNumberController,
                                   ),
                                 ],
                               ),
@@ -402,7 +388,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                   Text(
                                     "ORDER PRIORITY FILTER",
                                     style: TextStyle(
-                                      color: c.subtitle, // CHANGED
+                                      // color: c.subtitle, // CHANGED
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -422,14 +408,14 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                 width: double.infinity,
                                 // height: 115,
                                 decoration: BoxDecoration(
-                                  color: c.statBg, // CHANGED
+                                  // color: c.statBg, // CHANGED
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.all(20.0),
                                   child: Row(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         width: 50,
@@ -449,9 +435,9 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                       Expanded(
                                         child: Column(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
@@ -459,10 +445,12 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                                   child: Text(
                                                     "Is STAT Order",
                                                     style: TextStyle(
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       fontSize: 20,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: c.statTitle, // CHANGED
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      // color: c.statTitle, // CHANGED
                                                     ),
                                                   ),
                                                 ),
@@ -479,7 +467,9 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                                     ),
                                                     color: Color(0xFFA12F48),
                                                     borderRadius:
-                                                    BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                          5,
+                                                        ),
                                                   ),
                                                   child: Row(
                                                     children: [
@@ -500,30 +490,29 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                             Text(
                                               "Filter exclusively for high-priority collection orders",
                                               style: TextStyle(
-                                                color: c.statText, // CHANGED
+                                                // color: c.statText, // CHANGED
                                               ),
                                               softWrap: true,
                                             ),
-
                                           ],
                                         ),
                                       ),
+
                                       // Spacer(),
                                       Switch(
-                                        value: isStatOnly,
+                                        value: controller.isStatOnly,
                                         onChanged: (value) {
-                                          setModalState(() {
-                                            isStatOnly = value;
-                                          });
+                                          controller.isStatOnly = value;
+                                          controller.update();
                                         },
                                         activeTrackColor: Colors.red,
                                         activeThumbColor: Colors.white,
                                         inactiveTrackColor: Color(0xFFD1D5DB),
                                         inactiveThumbColor: Colors.white,
                                         trackOutlineColor:
-                                        WidgetStateProperty.all(
-                                          Colors.redAccent,
-                                        ),
+                                            WidgetStateProperty.all(
+                                              Colors.redAccent,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -533,7 +522,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Divider(color: c.divider), // CHANGED
+                        // Divider(color: c.divider), // CHANGED
                         SizedBox(height: 10),
 
                         Padding(
@@ -547,26 +536,26 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                   height: 60,
                                   // width: MediaQuery.of(context).size.width*0.25,
                                   decoration: BoxDecoration(
-                                    color: c.cancelBg, // CHANGED
+                                    // color: c.cancelBg, // CHANGED
                                     border: BoxBorder.all(
                                       width: 0.2,
-                                      color: c.cancelBg, // CHANGED
+                                      // color: c.cancelBg, // CHANGED
                                     ),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextButton(
                                     onPressed: () {
-                                      patientNameController.clear();
-                                      dateController.clear();
-                                      accessionController.clear();
-                                      orderNumberController.clear();
-                                      isStatOnly = false;
+                                      controller.patientNameController.clear();
+                                      controller.dateController.clear();
+                                      controller.accessionController.clear();
+                                      controller.orderNumberController.clear();
+                                      controller.isStatOnly = false;
                                       Navigator.pop(context);
                                     },
                                     child: Text(
                                       "Cancel",
                                       style: TextStyle(
-                                        color: c.cancelText, // CHANGED
+                                        // color: c.cancelText, // CHANGED
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
                                       ),
@@ -574,7 +563,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10,),
+                              SizedBox(width: 10),
                               Expanded(
                                 flex: 3,
                                 child: Container(
@@ -591,11 +580,11 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                                   child: TextButton.icon(
                                     onPressed: () {
                                       final cardDetails = {
-                                        "patientName": patientNameController.text,
-                                        "date": dateController.text,
-                                        "accession": accessionController.text,
-                                        "orderNumber": orderNumberController.text,
-                                        "statOrder": isStatOnly,
+                                        "patientName": controller.patientNameController.text,
+                                        "date": controller.dateController.text,
+                                        "accession": controller.accessionController.text,
+                                        "orderNumber": controller.orderNumberController.text,
+                                        "statOrder": controller.isStatOnly,
                                       };
                                       print(cardDetails);
                                     },
@@ -617,7 +606,7 @@ class _PatientBottomSheetState extends State<PatientBottomSheet> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,)
+                        SizedBox(height: 20),
                       ],
                     ),
                   );

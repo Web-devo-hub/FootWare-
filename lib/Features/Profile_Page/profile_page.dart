@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:footware/Features/Authentication/loginpage.dart';
+import 'package:footware/Features/Home/Product_controller/product_controller.dart';
+import 'package:footware/Features/Profile_Page/profile_page_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 // import 'package:footware/Payment/payment_methods.dart';
 
 import '../Payment/payment_methods.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+   const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool currentState = true;
-
+  // bool currentState = true;
+  final ProfilePageController controller = Get.put(ProfilePageController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,16 +156,18 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Transform.scale(
                   scale: 0.8,
-                  child: Switch(
-                    inactiveTrackColor: Colors.grey[100],
-                    inactiveThumbColor: Colors.white,
-                    activeTrackColor: Colors.grey,
-                    activeThumbColor: Colors.black,
-                    value: currentState,
-                    onChanged: (state) {
-                      currentState = state;
-                      setState(() {});
-                    },
+                  child: Obx(
+                    ()=> Switch(
+                      inactiveTrackColor: Colors.grey[100],
+                      inactiveThumbColor: Colors.white,
+                      activeTrackColor: Colors.grey,
+                      activeThumbColor: Colors.black,
+                      value: controller.currentState.value,
+                      onChanged: (state) {
+                        controller.currentState.value = state;
+                        controller.onChanged(controller.currentState.value);
+                      },
+                    ),
                   ),
                 ),
               ],
